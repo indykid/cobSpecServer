@@ -8,15 +8,16 @@ import java.util.List;
 
 public class ResourceReader {
 
-    public byte[] readFile(String filePath) {
+    public static byte[] readFile(String filePath) {
         try {
             return Files.readAllBytes((new File(filePath)).toPath());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return new byte[0];
         }
     }
 
-    public List<String> readFolder(String folderPath) {
+    public static List<String> readFolder(String folderPath) {
         return Arrays.asList(new File(folderPath).list());
     }
 }

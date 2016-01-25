@@ -12,11 +12,10 @@ import static org.junit.Assert.*;
 public class ResourceHandlerTest {
 
     private ResourceHandler resourceHandler;
-    private ResourceReader resourceReader = new ResourceReader();
 
     @Before
     public void setUp() throws Exception {
-        resourceHandler = new ResourceHandler(new ResourceFolder(FileHelpers.publicFolderPath), resourceReader);
+        resourceHandler = new ResourceHandler(new ResourceFolder(FileHelpers.publicFolderPath));
     }
 
     @Test

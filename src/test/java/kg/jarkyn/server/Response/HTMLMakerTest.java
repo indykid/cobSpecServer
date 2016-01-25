@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class HTMLBuilderTest {
+public class HTMLMakerTest {
 
     @Test
     public void makesLink() {
         String link = "<a href=\"/file1\">file1</a>";
 
-        assertEquals(link, HTMLBuilder.makeLink("/file1", "file1"));
+        assertEquals(link, HTMLMaker.makeLink("/file1", "file1"));
     }
 }
