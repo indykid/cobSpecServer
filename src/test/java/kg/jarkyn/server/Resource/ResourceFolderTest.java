@@ -1,5 +1,6 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
+import kg.jarkyn.server.FileHelpers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -7,27 +8,27 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class PublicFolderTest {
+public class ResourceFolderTest {
     private String path = FileHelpers.publicFolderPath;
-    private PublicFolder publicFolder;
+    private ResourceFolder resourceFolder;
 
     @Before
     public void setUp() throws Exception {
-        publicFolder= new PublicFolder(path);
+        resourceFolder = new ResourceFolder(path);
     }
 
     @Test
     public void returnsFullPublicPathFromRequestPath() {
-        assertEquals(FileHelpers.existingFileFullPath, publicFolder.fullPathFor(FileHelpers.existingFileRequestPath));
+        assertEquals(FileHelpers.plainFileFullPath, resourceFolder.fullPathFor(FileHelpers.plainFileRequestPath));
     }
 
     @Test
     public void fileIsNotPresent() {
-        assertFalse(publicFolder.isPresent(FileHelpers.nonExistingFile));
+        assertFalse(resourceFolder.isPresent(FileHelpers.nonExistingFile));
     }
 
     @Test
     public void fileIsPresent() {
-        assertTrue(publicFolder.isPresent(FileHelpers.existingFileRequestPath));
+        assertTrue(resourceFolder.isPresent(FileHelpers.plainFileRequestPath));
     }
 }

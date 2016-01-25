@@ -1,5 +1,6 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
+import kg.jarkyn.server.FileHelpers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,9 +17,9 @@ public class ResourceReaderTest {
 
     @Test
     public void returnsFileByteContent() {
-        byte[] expectedContent = FileHelpers.existingFileByteContent();
+        byte[] expectedContent = FileHelpers.plainFileByteContent();
 
-        assertArrayEquals(expectedContent, reader.readFile(FileHelpers.existingFileFullPath));
+        assertArrayEquals(expectedContent, reader.readFile(FileHelpers.plainFileFullPath));
     }
 
     @Test

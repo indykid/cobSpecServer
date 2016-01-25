@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Response;
 
 public class HTMLBuilder {
     private static String linkElementTemplate = "<a href=\"%s\">%s</a>";

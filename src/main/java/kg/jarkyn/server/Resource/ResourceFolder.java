@@ -1,13 +1,13 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
 import java.io.File;
 import java.nio.file.Files;
 
-public class PublicFolder {
+public class ResourceFolder {
 
     private final String path;
 
-    public PublicFolder(String path) {
+    public ResourceFolder(String path) {
         this.path = path;
     }
 

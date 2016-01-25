@@ -1,5 +1,6 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
+import kg.jarkyn.server.FileHelpers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ public class ResourceHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        resourceHandler = new ResourceHandler(new PublicFolder(FileHelpers.publicFolderPath), resourceReader);
+        resourceHandler = new ResourceHandler(new ResourceFolder(FileHelpers.publicFolderPath), resourceReader);
     }
 
     @Test
@@ -25,7 +26,7 @@ public class ResourceHandlerTest {
 
     @Test
     public void resourceIsPresent() {
-        assertTrue(resourceHandler.isPresent(FileHelpers.existingFileRequestPath));
+        assertTrue(resourceHandler.isPresent(FileHelpers.plainFileRequestPath));
     }
 
     @Test
@@ -35,14 +36,14 @@ public class ResourceHandlerTest {
 
     @Test
     public void resourceIsNotAFolder() {
-        assertFalse(resourceHandler.isFolder(FileHelpers.existingFileRequestPath));
+        assertFalse(resourceHandler.isFolder(FileHelpers.plainFileRequestPath));
     }
 
     @Test
     public void readsFileContentWhenGivenRequestPath() {
-        byte[] content = resourceHandler.readFile(FileHelpers.existingFileRequestPath);
+        byte[] content = resourceHandler.readFile(FileHelpers.plainFileRequestPath);
 
-        assertArrayEquals(FileHelpers.existingFileByteContent(), content);
+        assertArrayEquals(FileHelpers.plainFileByteContent(), content);
     }
 
     @Test
