@@ -3,11 +3,11 @@ package kg.jarkyn.server;
 import java.io.File;
 import java.nio.file.Files;
 
-public class PublicFolder {
+public class PublicResource {
 
     private final String path;
 
-    public PublicFolder(String path) {
+    public PublicResource(String path) {
         this.path = path;
     }
 
@@ -15,7 +15,7 @@ public class PublicFolder {
         return path + requestPath;
     }
 
-    public boolean isPresent(String requestPath) {
+    public boolean contains(String requestPath) {
         return Files.exists(new File(fullPathFor(requestPath)).toPath());
     }
 }
