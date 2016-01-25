@@ -24,8 +24,4 @@ class FileHelpers {
             throw new RuntimeException(e);
         }
     }
-
-    //    static List<String> publicFolderListing() {
-//        return Arrays.asList(new File(publicFolderPath).list());
-//    }
 }
