@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResourceReader {
+
     public byte[] readFile(String filePath) {
         try {
             return Files.readAllBytes((new File(filePath)).toPath());

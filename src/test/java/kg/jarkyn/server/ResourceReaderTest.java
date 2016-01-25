@@ -3,9 +3,6 @@ package kg.jarkyn.server;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -19,15 +16,13 @@ public class ResourceReaderTest {
 
     @Test
     public void returnsFileByteContent() {
-        byte[] expectedContent = Helpers.file1ByteContent();
+        byte[] expectedContent = FileHelpers.existingFileByteContent();
 
-        assertArrayEquals(expectedContent, reader.readFile(Helpers.publicFolder() + "/file1"));
+        assertArrayEquals(expectedContent, reader.readFile(FileHelpers.existingFileFullPath));
     }
 
     @Test
     public void listsFolderContents() {
-        List<String> expectedContent = Arrays.asList("file1", "file2");
-
-        assertEquals(expectedContent, reader.readFolder(Helpers.publicFolder()));
+        assertEquals(FileHelpers.publicFolderListing, reader.readFolder(FileHelpers.publicFolderPath));
     }
 }
