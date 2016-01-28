@@ -1,5 +1,7 @@
 package kg.jarkyn.server;
 
+import kg.jarkyn.server.Incoming.Requester;
+import kg.jarkyn.server.Outgoing.Response;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -41,7 +43,7 @@ public class ServerTest {
         }
     }
 
-    private class ResponderDouble implements Responder {
+    private class ResponderDouble implements Outgoing.Responder {
         public Response prepareResponse(Requester requester) {
             return new Response("hello");
         }

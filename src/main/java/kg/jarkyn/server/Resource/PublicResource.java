@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
 import java.io.File;
 import java.nio.file.Files;

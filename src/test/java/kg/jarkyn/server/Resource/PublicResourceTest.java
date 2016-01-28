@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Resource;
 
 import kg.jarkyn.server.Fixtures.PublicResourceFixture;
 import org.junit.Before;
