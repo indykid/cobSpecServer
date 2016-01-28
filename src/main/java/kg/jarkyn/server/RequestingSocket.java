@@ -1,0 +1,31 @@
+package kg.jarkyn.server;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+public class RequestingSocket implements Requester {
+    private Socket socket;
+
+    public RequestingSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public InputStream getInputStream() {
+        try {
+            return socket.getInputStream();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public OutputStream getOutputStream() {
+        return null;
+    }
+}
