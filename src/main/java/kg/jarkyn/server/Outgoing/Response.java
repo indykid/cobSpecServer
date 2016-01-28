@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Outgoing;
 
 public class Response {
     private final String body;

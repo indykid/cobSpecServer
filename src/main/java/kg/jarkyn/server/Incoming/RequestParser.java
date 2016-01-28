@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Incoming;
 
 import java.io.BufferedReader;
 import java.io.IOException;

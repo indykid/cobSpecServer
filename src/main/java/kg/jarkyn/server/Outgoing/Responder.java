@@ -1,4 +1,6 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Outgoing;
+
+import kg.jarkyn.server.Incoming.Requester;
 
 public interface Responder {
     Response prepareResponse(Requester requester);

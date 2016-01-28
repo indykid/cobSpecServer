@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.Incoming;
 
 public class ParsedRequest {
     private final String verb;

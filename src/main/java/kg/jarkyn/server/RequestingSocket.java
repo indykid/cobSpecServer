@@ -1,5 +1,7 @@
 package kg.jarkyn.server;
 
+import kg.jarkyn.server.Incoming.Requester;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,10 +14,6 @@ public class RequestingSocket implements Requester {
         this.socket = socket;
     }
 
-    public Socket getSocket() {
-        return socket;
-    }
-
     public InputStream getInputStream() {
         try {
             return socket.getInputStream();
@@ -26,6 +24,10 @@ public class RequestingSocket implements Requester {
 
     @Override
     public OutputStream getOutputStream() {
-        return null;
+        try {
+            return socket.getOutputStream();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

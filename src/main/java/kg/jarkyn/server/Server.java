@@ -1,5 +1,9 @@
 package kg.jarkyn.server;
 
+import kg.jarkyn.server.Incoming.Requester;
+import kg.jarkyn.server.Outgoing.Responder;
+import kg.jarkyn.server.Outgoing.Response;
+
 public class Server {
     private final ReceivingSocket serverSocket;
     private final Responder responder;
