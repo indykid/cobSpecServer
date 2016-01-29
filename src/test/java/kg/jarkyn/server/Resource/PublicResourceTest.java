@@ -14,6 +14,7 @@ public class PublicResourceTest {
     private String nonExistingFile = PublicResourceFixture.nonExistingFile;
     private String existingFileFullPath = PublicResourceFixture.existingFileFullPath;
     private PublicResource publicResource;
+    private String publicResourceRequestPath = PublicResourceFixture.publicResourceRequestPath;
 
     @Before
     public void setUp() throws Exception {
@@ -33,5 +34,20 @@ public class PublicResourceTest {
     @Test
     public void containsResource() {
         assertTrue(publicResource.contains(existingFileRequestPath));
+    }
+
+    @Test
+    public void resourceIsADirectory() {
+        assertTrue(publicResource.isDirectory(publicResourceRequestPath));
+    }
+
+    @Test
+    public void resourceIsNotADirectory() {
+        assertFalse(publicResource.isDirectory(existingFileRequestPath));
+    }
+
+    @Test
+    public void nonExistingResourceIsNotADirectory() {
+        assertFalse(publicResource.isDirectory(nonExistingFile));
     }
 }

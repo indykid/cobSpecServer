@@ -18,4 +18,8 @@ public class PublicResource {
     public boolean contains(String requestPath) {
         return Files.exists(new File(fullPathFor(requestPath)).toPath());
     }
+
+    public boolean isDirectory(String requestPath) {
+        return new File(fullPathFor(requestPath)).isDirectory();
+    }
 }
