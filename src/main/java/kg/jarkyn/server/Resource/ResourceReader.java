@@ -1,4 +1,4 @@
-package kg.jarkyn.server.Resource;
+package kg.jarkyn.server.resource;
 
 import java.io.File;
 import java.io.IOException;

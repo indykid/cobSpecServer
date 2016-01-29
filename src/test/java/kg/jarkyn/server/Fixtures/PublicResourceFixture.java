@@ -1,4 +1,4 @@
-package kg.jarkyn.server.Fixtures;
+package kg.jarkyn.server.fixtures;
 
 import java.io.File;
 import java.io.IOException;

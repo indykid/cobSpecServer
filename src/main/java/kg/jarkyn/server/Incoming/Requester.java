@@ -1,4 +1,4 @@
-package kg.jarkyn.server.Incoming;
+package kg.jarkyn.server.incoming;
 
 import java.io.InputStream;
 import java.io.OutputStream;

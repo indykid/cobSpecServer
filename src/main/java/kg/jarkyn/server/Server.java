@@ -1,16 +1,16 @@
 package kg.jarkyn.server;
 
-import kg.jarkyn.server.Incoming.Requester;
-import kg.jarkyn.server.Outgoing.Responder;
-import kg.jarkyn.server.Outgoing.Response;
+import kg.jarkyn.server.incoming.Requester;
+import kg.jarkyn.server.outgoing.Controller;
+import kg.jarkyn.server.outgoing.Response;
 
 public class Server {
     private final ReceivingSocket serverSocket;
-    private final Responder responder;
+    private final Controller controller;
 
-    public Server(ReceivingSocket serverSocket, Responder responder) {
+    public Server(ReceivingSocket serverSocket, Controller controller) {
         this.serverSocket = serverSocket;
-        this.responder = responder;
+        this.controller = controller;
     }
 
     public void run() {
@@ -24,10 +24,10 @@ public class Server {
     }
 
     private Response prepareResponse(Requester clientSocket) {
-        return responder.prepareResponse(clientSocket);
+        return controller.prepareResponse(clientSocket);
     }
 
     private void sendResponse(Requester requester, Response response) {
-        responder.sendResponse(requester, response);
+        controller.sendResponse(requester, response);
     }
 }

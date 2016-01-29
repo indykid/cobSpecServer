@@ -1,4 +1,4 @@
-package kg.jarkyn.server.Incoming;
+package kg.jarkyn.server.incoming;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,25 +8,25 @@ import java.nio.charset.StandardCharsets;
 
 public class RequestParser {
 
-    public static ParsedRequest parse(InputStream inputStream) {
+    public ParsedRequest parse(InputStream inputStream) {
         String requestLine = getRequestLine(inputToReader(inputStream));
         return new ParsedRequest(extractVerb(requestLine), extractPath(requestLine));
     }
 
-    private static String extractVerb(String requestLine) {
+    private String extractVerb(String requestLine) {
         return requestLine.split(" ")[0];
     }
 
-    private static String extractPath(String requestLine) {
+    private String extractPath(String requestLine) {
         return requestLine.split(" ")[1];
     }
 
-    private static BufferedReader inputToReader(InputStream inputStream) {
+    private BufferedReader inputToReader(InputStream inputStream) {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
         return new BufferedReader(inputStreamReader);
     }
 
-    private static String getRequestLine(BufferedReader reader) {
+    private String getRequestLine(BufferedReader reader) {
         try {
             return reader.readLine();
         } catch (IOException e) {

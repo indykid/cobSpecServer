@@ -1,6 +1,6 @@
-package kg.jarkyn.server.Resource;
+package kg.jarkyn.server.resource;
 
-import kg.jarkyn.server.Fixtures.PublicResourceFixture;
+import kg.jarkyn.server.fixtures.PublicResourceFixture;
 import org.junit.Before;
 import org.junit.Test;
 

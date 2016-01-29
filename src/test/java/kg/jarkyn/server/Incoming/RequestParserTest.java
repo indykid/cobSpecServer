@@ -1,4 +1,4 @@
-package kg.jarkyn.server.Incoming;
+package kg.jarkyn.server.incoming;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class RequestParserTest {
 
     @Test
     public void parsesRequestCorrectly() throws IOException {
-        ParsedRequest parsedRequest = RequestParser.parse(inputStream);
+        ParsedRequest parsedRequest = new RequestParser().parse(inputStream);
 
         assertEquals("GET", parsedRequest.getVerb());
         assertEquals("/index.html", parsedRequest.getPath());

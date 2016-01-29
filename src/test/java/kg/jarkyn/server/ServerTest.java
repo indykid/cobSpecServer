@@ -1,19 +1,19 @@
 package kg.jarkyn.server;
 
-import kg.jarkyn.server.Incoming.Requester;
-import kg.jarkyn.server.Outgoing.Response;
+import kg.jarkyn.server.doubles.RequestingSocketDouble;
+import kg.jarkyn.server.incoming.Requester;
+import kg.jarkyn.server.outgoing.Controller;
+import kg.jarkyn.server.outgoing.Response;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static org.junit.Assert.assertEquals;
 
 public class ServerTest {
     private Server server;
-    private ResponderDouble responder;
+    private ControllerDouble responder;
     private RequestingSocketDouble requestingSocket;
     private ReceivingSocketDouble serverSocket;
 
@@ -21,13 +21,13 @@ public class ServerTest {
     public void receivesAndRespondsToRequest() {
         requestingSocket = new RequestingSocketDouble();
         serverSocket = new ReceivingSocketDouble(requestingSocket);
-        responder = new ResponderDouble();
+        responder = new ControllerDouble();
         server = new Server(serverSocket, responder);
 
         server.run();
 
         ByteArrayOutputStream outputStream = (ByteArrayOutputStream) requestingSocket.getOutputStream();
-        assertEquals("hello", new String(outputStream.toByteArray()));
+        assertEquals("hello", outputStream.toString());
     }
 
     private class ReceivingSocketDouble extends ReceivingSocket {
@@ -43,7 +43,7 @@ public class ServerTest {
         }
     }
 
-    private class ResponderDouble implements Outgoing.Responder {
+    private class ControllerDouble implements Controller {
         public Response prepareResponse(Requester requester) {
             return new Response("hello");
         }
@@ -58,16 +58,4 @@ public class ServerTest {
         }
     }
 
-    private class RequestingSocketDouble implements Requester {
-        private OutputStream outputStream = new ByteArrayOutputStream();
-
-        @Override
-        public InputStream getInputStream() {
-            return null;
-        }
-
-        public OutputStream getOutputStream() {
-            return outputStream;
-        }
-    }
 }
