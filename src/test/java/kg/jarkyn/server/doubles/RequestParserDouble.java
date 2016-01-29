@@ -1,6 +1,6 @@
 package kg.jarkyn.server.doubles;
 
-import kg.jarkyn.server.incoming.ParsedRequest;
+import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.incoming.RequestParser;
 
 import java.io.InputStream;
@@ -12,8 +12,8 @@ public class RequestParserDouble extends RequestParser {
         return parsing;
     }
 
-    public ParsedRequest parse(InputStream inputStream) {
+    public Request parse(InputStream inputStream) {
         parsing = true;
-        return new ParsedRequest("some method", "some/path");
+        return new Request("some method", "some/path");
     }
 }

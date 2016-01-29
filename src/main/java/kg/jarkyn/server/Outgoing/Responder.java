@@ -1,7 +1,7 @@
 package kg.jarkyn.server.outgoing;
 
-import kg.jarkyn.server.incoming.ParsedRequest;
+import kg.jarkyn.server.incoming.Request;
 
 public interface Responder {
-    Response respond(ParsedRequest request);
+    Response respond(Request request);
 }

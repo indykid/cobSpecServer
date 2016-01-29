@@ -1,7 +1,7 @@
 package kg.jarkyn.server.outgoing;
 
 import kg.jarkyn.server.doubles.*;
-import kg.jarkyn.server.incoming.ParsedRequest;
+import kg.jarkyn.server.incoming.Request;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class ResponseControllerTest {
     private RequestParserDouble parser;
     private ResponseController controller;
     private InputStream stream = new ByteArrayInputStream(new byte[0]);
-    private ParsedRequest request = new ParsedRequest("request method", "requested/path");
+    private Request request = new Request("request method", "requested/path");
 
     @Before
     public void setUp() throws Exception {

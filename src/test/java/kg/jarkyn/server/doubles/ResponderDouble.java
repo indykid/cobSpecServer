@@ -1,6 +1,6 @@
 package kg.jarkyn.server.doubles;
 
-import kg.jarkyn.server.incoming.ParsedRequest;
+import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.outgoing.Responder;
 import kg.jarkyn.server.outgoing.Response;
 
@@ -12,7 +12,7 @@ public class ResponderDouble implements Responder {
     }
 
     @Override
-    public Response respond(ParsedRequest request) {
+    public Response respond(Request request) {
         responding = true;
         return new Response("response from server");
     }

@@ -8,9 +8,9 @@ import java.nio.charset.StandardCharsets;
 
 public class RequestParser {
 
-    public ParsedRequest parse(InputStream inputStream) {
+    public Request parse(InputStream inputStream) {
         String requestLine = getRequestLine(inputToReader(inputStream));
-        return new ParsedRequest(extractVerb(requestLine), extractPath(requestLine));
+        return new Request(extractVerb(requestLine), extractPath(requestLine));
     }
 
     private String extractVerb(String requestLine) {

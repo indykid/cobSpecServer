@@ -16,7 +16,7 @@ public class ResponseController implements Controller {
 
     @Override
     public Response prepareResponse(Requester requester) {
-        ParsedRequest request = parse(requester.getInputStream());
+        Request request = parse(requester.getInputStream());
         Responder responder = getResponder(request);
         return getResponse(request, responder);
     }
@@ -30,16 +30,16 @@ public class ResponseController implements Controller {
         }
     }
 
-    public ParsedRequest parse(InputStream inputStream) {
+    public Request parse(InputStream inputStream) {
         return parser.parse(inputStream);
     }
 
 
-    public Responder getResponder(ParsedRequest request) {
+    public Responder getResponder(Request request) {
         return delegator.allocateResponder(request);
     }
 
-    public Response getResponse(ParsedRequest request, Responder responder) {
+    public Response getResponse(Request request, Responder responder) {
         return responder.respond(request);
     }
 }

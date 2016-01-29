@@ -1,10 +1,10 @@
 package kg.jarkyn.server.incoming;
 
-public class ParsedRequest {
+public class Request {
     private final String verb;
     private final String path;
 
-    public ParsedRequest(String verb, String path) {
+    public Request(String verb, String path) {
         this.verb = verb;
         this.path = path;
     }
