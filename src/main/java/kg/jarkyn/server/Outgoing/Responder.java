@@ -2,6 +2,7 @@ package kg.jarkyn.server.outgoing;
 
 import kg.jarkyn.server.incoming.Request;
 
-public interface Responder {
-    Response respond(Request request);
+public abstract class Responder {
+    public static final String DEFAULT_PROTOCOL = "HTTP/1.1";
+    public abstract Response respond(Request request);
 }

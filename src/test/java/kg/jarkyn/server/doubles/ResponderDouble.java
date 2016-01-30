@@ -4,7 +4,7 @@ import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.outgoing.Responder;
 import kg.jarkyn.server.outgoing.Response;
 
-public class ResponderDouble implements Responder {
+public class ResponderDouble extends Responder {
     private boolean responding;
 
     public boolean isResponding() {
