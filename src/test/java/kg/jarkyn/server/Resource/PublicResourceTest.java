@@ -1,6 +1,6 @@
 package kg.jarkyn.server.resource;
 
-import kg.jarkyn.server.fixtures.PublicResourceFixture;
+import kg.jarkyn.server.fixtures.PublicDirectoryFixture;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +10,10 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.*;
 
 public class PublicResourceTest {
-    private String path = PublicResourceFixture.publicResourcePath;
-    private String existingFileRequestPath = PublicResourceFixture.existingFileRequestPath;
-    private String nonExistingFile = PublicResourceFixture.nonExistingFile;
-    private String publicResourceRequestPath = PublicResourceFixture.publicResourceRequestPath;
+    private String path = PublicDirectoryFixture.publicDirectoryPath;
+    private String existingFileRequestPath = "/file1";
+    private String nonExistingFile = "/non_existing_file";
+    private String publicDirectoryRequestPath = "/";
     private PublicResource publicResource;
 
     @Before
@@ -33,7 +33,7 @@ public class PublicResourceTest {
 
     @Test
     public void resourceIsADirectory() {
-        assertTrue(publicResource.isDirectory(publicResourceRequestPath));
+        assertTrue(publicResource.isDirectory(publicDirectoryRequestPath));
     }
 
     @Test
@@ -48,16 +48,13 @@ public class PublicResourceTest {
 
     @Test
     public void readsFile() {
-        String requestPath = PublicResourceFixture.existingFileRequestPath;
-        byte[] expectedContent = PublicResourceFixture.existingFileByteContent();
+        byte[] expectedContent = PublicDirectoryFixture.file1ByteContent();
 
-        assertArrayEquals(expectedContent, publicResource.readFile(requestPath));
+        assertArrayEquals(expectedContent, publicResource.readFile(existingFileRequestPath));
     }
 
     @Test
     public void listsDirectoryContents() {
-        String directoryPath = PublicResourceFixture.publicResourceRequestPath;
-
-        assertEquals(Arrays.asList("file1", "file2"), publicResource.readDirectory(directoryPath));
+        assertEquals(Arrays.asList("file1", "file2"),publicResource.readDirectory(publicDirectoryRequestPath));
     }
 }
