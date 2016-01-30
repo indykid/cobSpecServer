@@ -7,10 +7,6 @@ public class Response {
         this.body = body;
     }
 
-    public String getMessage() {
-        return body;
-    }
-
     public byte[] getBytes() {
         return body.getBytes();
     }

@@ -17,7 +17,7 @@ public class ResponseController implements Controller {
     @Override
     public Response prepareResponse(Requester requester) {
         Request request = parse(requester.getInputStream());
-        Responder responder = getResponder(request);
+        Responder responder = chooseResponder(request);
         return getResponse(request, responder);
     }
 
@@ -35,8 +35,8 @@ public class ResponseController implements Controller {
     }
 
 
-    public Responder getResponder(Request request) {
-        return delegator.allocateResponder(request);
+    public Responder chooseResponder(Request request) {
+        return delegator.chooseResponder(request);
     }
 
     public Response getResponse(Request request, Responder responder) {

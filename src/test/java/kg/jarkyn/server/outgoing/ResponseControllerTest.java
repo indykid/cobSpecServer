@@ -35,7 +35,7 @@ public class ResponseControllerTest {
 
     @Test
     public void getsRelevantResponseMaker() {
-        controller.getResponder(request);
+        controller.chooseResponder(request);
 
         assertTrue(delegator.isDelegating());
     }
@@ -61,8 +61,11 @@ public class ResponseControllerTest {
 
     @Test
     public void preparesResponse() {
-        String response = controller.prepareResponse(new RequestingSocketDouble()).getMessage();
+        RequestingSocketDouble requester = new RequestingSocketDouble();
 
-        assertEquals("response from server", response);
+        Response response = controller.prepareResponse(requester);
+
+        String actual = new String(response.getBytes());
+        assertEquals("response from server", actual);
     }
 }
