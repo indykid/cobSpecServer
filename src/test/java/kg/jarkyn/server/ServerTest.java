@@ -27,7 +27,7 @@ public class ServerTest {
         server.run();
 
         ByteArrayOutputStream outputStream = (ByteArrayOutputStream) requestingSocket.getOutputStream();
-        assertEquals("hello", outputStream.toString());
+        assertEquals("status\r\nheaders\r\n\r\nbody", outputStream.toString());
     }
 
     private class ReceivingSocketDouble extends ReceivingSocket {
@@ -44,14 +44,16 @@ public class ServerTest {
     }
 
     private class ControllerDouble implements Controller {
+
+        @Override
         public Response prepareResponse(Requester requester) {
-            return new Response("hello");
+            return new Response("status", "headers", "body");
         }
 
         @Override
         public void sendResponse(Requester requester, Response response) {
             try {
-                requester.getOutputStream().write(response.getBytes());
+                requester.getOutputStream().write(response.getContent());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

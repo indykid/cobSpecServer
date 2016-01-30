@@ -14,6 +14,6 @@ public class ResponderDouble implements Responder {
     @Override
     public Response respond(Request request) {
         responding = true;
-        return new Response("response from server");
+        return new Response("status", "headers", "body");
     }
 }
