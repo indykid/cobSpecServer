@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
 
 public class PublicResourceFixture {
     private static String projectDirectoryPath = System.getProperty("user.dir");
@@ -14,7 +12,6 @@ public class PublicResourceFixture {
     public static String existingFileRequestPath = "/file1";
     public static String nonExistingFile = "/non_existing_file";
     public static String existingFileFullPath = publicResourcePath + existingFileRequestPath;
-    public static List<String> publicResourceListing = Arrays.asList("file1", "file2");
 
     public static byte[] existingFileByteContent() {
         Path file = new File(existingFileFullPath).toPath();

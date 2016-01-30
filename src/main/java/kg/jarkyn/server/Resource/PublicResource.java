@@ -1,7 +1,10 @@
 package kg.jarkyn.server.resource;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.List;
 
 public class PublicResource {
 
@@ -11,7 +14,7 @@ public class PublicResource {
         this.path = path;
     }
 
-    public String fullPathFor(String requestPath) {
+    private String fullPathFor(String requestPath) {
         return path + requestPath;
     }
 
@@ -21,5 +24,21 @@ public class PublicResource {
 
     public boolean isDirectory(String requestPath) {
         return new File(fullPathFor(requestPath)).isDirectory();
+    }
+
+    public byte[] readFile(String requestPath) {
+        String fullPath = fullPathFor(requestPath);
+        if (contains(requestPath)) {
+            try {
+                return Files.readAllBytes((new File(fullPath)).toPath());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return new byte[0];
+    }
+
+    public List<String> readDirectory(String requestPath) {
+        return Arrays.asList(new File(fullPathFor(requestPath)).list());
     }
 }

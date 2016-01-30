@@ -4,26 +4,21 @@ import kg.jarkyn.server.fixtures.PublicResourceFixture;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class PublicResourceTest {
     private String path = PublicResourceFixture.publicResourcePath;
     private String existingFileRequestPath = PublicResourceFixture.existingFileRequestPath;
     private String nonExistingFile = PublicResourceFixture.nonExistingFile;
-    private String existingFileFullPath = PublicResourceFixture.existingFileFullPath;
-    private PublicResource publicResource;
     private String publicResourceRequestPath = PublicResourceFixture.publicResourceRequestPath;
+    private PublicResource publicResource;
 
     @Before
     public void setUp() throws Exception {
         publicResource = new PublicResource(path);
-    }
-
-    @Test
-    public void returnsFullPublicPathFromRequestPath() {
-        assertEquals(existingFileFullPath, publicResource.fullPathFor(existingFileRequestPath));
     }
 
     @Test
@@ -49,5 +44,20 @@ public class PublicResourceTest {
     @Test
     public void nonExistingResourceIsNotADirectory() {
         assertFalse(publicResource.isDirectory(nonExistingFile));
+    }
+
+    @Test
+    public void readsFile() {
+        String requestPath = PublicResourceFixture.existingFileRequestPath;
+        byte[] expectedContent = PublicResourceFixture.existingFileByteContent();
+
+        assertArrayEquals(expectedContent, publicResource.readFile(requestPath));
+    }
+
+    @Test
+    public void listsDirectoryContents() {
+        String directoryPath = PublicResourceFixture.publicResourceRequestPath;
+
+        assertEquals(Arrays.asList("file1", "file2"), publicResource.readDirectory(directoryPath));
     }
 }
