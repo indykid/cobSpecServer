@@ -12,6 +12,13 @@ public class Delegator {
     }
 
     public Responder chooseResponder(Request request) {
-        return null;
+        if (isDirectory(request.getPath())) {
+            return new DirectoryListingResponder(publicResource);
+        }
+        return new FileReadResponder(publicResource);
+    }
+
+    private boolean isDirectory(String requestPath) {
+        return publicResource.isDirectory(requestPath);
     }
 }
