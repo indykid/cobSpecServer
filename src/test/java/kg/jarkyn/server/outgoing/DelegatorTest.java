@@ -2,10 +2,7 @@ package kg.jarkyn.server.outgoing;
 
 import kg.jarkyn.server.fixtures.PublicDirectoryFixture;
 import kg.jarkyn.server.incoming.Request;
-import kg.jarkyn.server.responders.DirectoryListingResponder;
-import kg.jarkyn.server.responders.FileReadResponder;
-import kg.jarkyn.server.responders.FourOhFourResponder;
-import kg.jarkyn.server.responders.POSTResponder;
+import kg.jarkyn.server.responders.*;
 import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,5 +45,12 @@ public class DelegatorTest {
 
         assertTrue(delegator.chooseResponder(request) instanceof POSTResponder);
 
+    }
+
+    @Test
+    public void returnsMethodNotAllowedResponder() {
+        Request request = new Request("POST", "/file1");
+
+        assertTrue(delegator.chooseResponder(request) instanceof MethodNotAllowedResponder);
     }
 }
