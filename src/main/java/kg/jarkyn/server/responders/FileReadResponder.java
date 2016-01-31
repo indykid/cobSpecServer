@@ -16,7 +16,7 @@ public class FileReadResponder extends Responder {
 
     @Override
     public Response respond(Request request) {
-        String body = new String(publicResource.readFile(request.getPath()));
+        byte[] body = publicResource.readFile(request.getPath());
         return new Response(successStatusLine(), headers(request), body);
     }
 

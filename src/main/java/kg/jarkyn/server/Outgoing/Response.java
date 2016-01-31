@@ -3,17 +3,24 @@ package kg.jarkyn.server.outgoing;
 public class Response {
     private String statusLine;
     private String headers;
-    private final String body;
+    private byte[] body;
 
-    public Response(String statusLine, String headers, String body) {
+    public Response(String statusLine, String headers, byte[] body) {
         this.statusLine = statusLine;
         this.headers = headers;
         this.body = body;
     }
 
-    public byte[] getContent() {
-        String content = formatStatus() + formatHeaders() + body;
-        return content.getBytes();
+    public byte[] getByteContent() {
+        String header = formatStatus() + formatHeaders();
+        return combine(header.getBytes(), body);
+    }
+
+    private byte[] combine(byte[] header, byte[] body) {
+        byte[] combined = new byte[header.length + body.length];
+        System.arraycopy(header, 0,combined, 0, header.length);
+        System.arraycopy(body, 0, combined, header.length, body.length);
+        return combined;
     }
 
     private String formatHeaders() {
@@ -21,9 +28,10 @@ public class Response {
     }
 
     private String formatStatus() {
-        if (headers.isEmpty()) {
-            return statusLine;
-        }
         return statusLine + "\r\n" ;
+    }
+
+    public String getContent() {
+        return formatStatus() + formatHeaders() + new String(body);
     }
 }

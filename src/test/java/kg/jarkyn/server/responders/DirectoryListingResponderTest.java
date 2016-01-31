@@ -5,7 +5,7 @@ import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class DirectoryListingResponderTest {
     @Test
@@ -13,14 +13,16 @@ public class DirectoryListingResponderTest {
         PublicResource publicResource = new PublicResource(PublicDirectoryFixture.publicDirectoryPath);
         DirectoryListingResponder responder = new DirectoryListingResponder(publicResource);
 
-        assertArrayEquals(directoryListingResponse(), responder.respond(new Request("GET", "/")).getContent());
+        String response = responder.respond(new Request("GET", "/")).getContent();
+
+        assertEquals(directoryListingResponse(), response);
     }
 
-    private byte[] directoryListingResponse() {
-        String statusLine = "HTTP/1.1 200 OK";
+    private String directoryListingResponse() {
+        String statusLine = "HTTP/1.1 200 OK\r\n";
         String headers = "" + "\r\n\r\n";
         String html = "<a href=\"/file1\">file1</a>" +
                       "<a href=\"/file2\">file2</a>" ;
-        return (statusLine + headers + html).getBytes();
+        return (statusLine + headers + html);
     }
 }

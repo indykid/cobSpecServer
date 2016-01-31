@@ -14,6 +14,6 @@ public class ResponderDouble extends Responder {
     @Override
     public Response respond(Request request) {
         responding = true;
-        return new Response("status", "headers", "body");
+        return new Response("status", "headers", "body".getBytes());
     }
 }

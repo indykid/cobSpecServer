@@ -24,7 +24,7 @@ public class ResponseController implements Controller {
     @Override
     public void sendResponse(Requester requester, Response response) {
         try {
-            requester.getOutputStream().write(response.getContent());
+            requester.getOutputStream().write(response.getByteContent());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

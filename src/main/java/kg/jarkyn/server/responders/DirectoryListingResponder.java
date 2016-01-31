@@ -23,6 +23,6 @@ public class DirectoryListingResponder extends Responder {
             html += HTMLMaker.makeLink("/" + fileName, fileName);
         }
         String headers = "";
-        return new Response(successStatusLine(), headers, html);
+        return new Response(successStatusLine(), headers, html.getBytes());
     }
 }

@@ -52,8 +52,8 @@ public class ResponseControllerTest {
     @Test
     public void sendsResponse() {
         RequestingSocketDouble requester = new RequestingSocketDouble();
-        Response response = new Response("status", "header", "body");
-        String expected = new String(response.getContent());
+        Response response = new Response("status", "header", "body".getBytes());
+        String expected = new String(response.getByteContent());
 
         controller.sendResponse(requester, response);
 
@@ -66,7 +66,7 @@ public class ResponseControllerTest {
 
         Response response = controller.prepareResponse(requester);
 
-        String actual = new String(response.getContent());
+        String actual = new String(response.getByteContent());
         assertEquals("status\r\nheaders\r\n\r\nbody", actual);
     }
 }
