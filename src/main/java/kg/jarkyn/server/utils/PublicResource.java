@@ -41,4 +41,8 @@ public class PublicResource {
     public List<String> readDirectory(String requestPath) {
         return Arrays.asList(new File(fullPathFor(requestPath)).list());
     }
+
+    public boolean isMethodAllowed(String method) {
+        return method.equals("GET");
+    }
 }

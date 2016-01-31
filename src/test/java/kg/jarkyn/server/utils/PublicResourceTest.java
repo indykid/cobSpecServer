@@ -57,4 +57,9 @@ public class PublicResourceTest {
     public void listsDirectoryContents() {
         assertEquals(Arrays.asList("file1", "file2"),publicResource.readDirectory(publicDirectoryRequestPath));
     }
+
+    @Test
+    public void isAllowed() {
+        assertTrue(publicResource.isMethodAllowed("GET"));
+    }
 }

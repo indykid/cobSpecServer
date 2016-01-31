@@ -18,4 +18,14 @@ public class FileReadResponderTest {
         assertEquals(expected, responder.respond(new Request("GET", "/file1"))
                 .getContent());
     }
+
+    @Test
+    public void doesNotAllowNonGETRequests() {
+        PublicResource publicResource = new PublicResource(PublicDirectoryFixture.publicDirectoryPath);
+        FileReadResponder responder = new FileReadResponder(publicResource);
+        String expected = "HTTP/1.1 405 Method Not Allowed\r\nAllow: GET\r\n\r\n";
+
+        assertEquals(expected, responder.respond(new Request("POST", "/file1"))
+                .getContent());
+    }
 }
