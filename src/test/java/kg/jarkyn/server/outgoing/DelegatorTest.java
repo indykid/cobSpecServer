@@ -2,9 +2,10 @@ package kg.jarkyn.server.outgoing;
 
 import kg.jarkyn.server.fixtures.PublicDirectoryFixture;
 import kg.jarkyn.server.incoming.Request;
-import kg.jarkyn.server.responders.FileReadResponder;
-import kg.jarkyn.server.utils.PublicResource;
 import kg.jarkyn.server.responders.DirectoryListingResponder;
+import kg.jarkyn.server.responders.FileReadResponder;
+import kg.jarkyn.server.responders.FourOhFourResponder;
+import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,5 +32,12 @@ public class DelegatorTest {
         Request request = new Request("GET", "/");
 
         assertTrue(delegator.chooseResponder(request) instanceof DirectoryListingResponder);
+    }
+
+    @Test
+    public void returnsFourOhFourResponder() {
+        Request request = new Request("GET", "/non_existent_path");
+
+        assertTrue(delegator.chooseResponder(request) instanceof FourOhFourResponder);
     }
 }

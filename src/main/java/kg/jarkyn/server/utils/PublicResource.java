@@ -18,7 +18,7 @@ public class PublicResource {
         return path + requestPath;
     }
 
-    boolean contains(String requestPath) {
+    public boolean contains(String requestPath) {
         return Files.exists(new File(fullPathFor(requestPath)).toPath());
     }
 
