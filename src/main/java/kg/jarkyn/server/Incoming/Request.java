@@ -1,11 +1,11 @@
 package kg.jarkyn.server.incoming;
 
 public class Request {
-    private final String verb;
+    private final String method;
     private final String path;
 
-    public Request(String verb, String path) {
-        this.verb = verb;
+    public Request(String method, String path) {
+        this.method = method;
         this.path = path;
     }
 
@@ -13,7 +13,7 @@ public class Request {
         return path;
     }
 
-    public String getVerb() {
-        return verb;
+    public String getMethod() {
+        return method;
     }
 }

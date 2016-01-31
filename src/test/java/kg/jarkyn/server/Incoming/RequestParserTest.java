@@ -25,7 +25,7 @@ public class RequestParserTest {
     public void parsesRequestCorrectly() throws IOException {
         Request request = new RequestParser().parse(inputStream);
 
-        assertEquals("GET", request.getVerb());
+        assertEquals("GET", request.getMethod());
         assertEquals("/index.html", request.getPath());
     }
 }
