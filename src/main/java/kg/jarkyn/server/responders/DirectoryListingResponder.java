@@ -22,7 +22,7 @@ public class DirectoryListingResponder extends Responder {
         for (String fileName : files) {
             html += HTMLMaker.makeLink("/" + fileName, fileName);
         }
-        String headers = "";
+        String headers = "Content-Type: text/html";
         return new Response(successStatusLine(), headers, html.getBytes());
     }
 }

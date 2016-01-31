@@ -48,13 +48,13 @@ public class ServerTest {
 
         @Override
         public Response prepareResponse(Requester requester) {
-            return new Response("status", "headers", "body");
+            return new Response("status", "headers", "body".getBytes());
         }
 
         @Override
         public void sendResponse(Requester requester, Response response) {
             try {
-                requester.getOutputStream().write(response.getContent());
+                requester.getOutputStream().write(response.getByteContent());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
