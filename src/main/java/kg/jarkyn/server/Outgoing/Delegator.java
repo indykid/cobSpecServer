@@ -26,8 +26,15 @@ public class Delegator {
 
         } else if (isPOST(request)) {
             return new POSTResponder();
+
+        } else if (isPUT(request)) {
+            return new PUTResponder();
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean isPUT(Request request) {
+        return request.getMethod().equals("PUT");
     }
 
     private boolean isNotAllowed(Request request) {

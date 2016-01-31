@@ -44,7 +44,6 @@ public class DelegatorTest {
         Request request = new Request("POST", "/form");
 
         assertTrue(delegator.chooseResponder(request) instanceof POSTResponder);
-
     }
 
     @Test
@@ -52,5 +51,12 @@ public class DelegatorTest {
         Request request = new Request("POST", "/file1");
 
         assertTrue(delegator.chooseResponder(request) instanceof MethodNotAllowedResponder);
+    }
+
+    @Test
+    public void returnsPUTResponder() {
+        Request request = new Request("PUT", "/form");
+
+        assertTrue(delegator.chooseResponder(request) instanceof PUTResponder);
     }
 }

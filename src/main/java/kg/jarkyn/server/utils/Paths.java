@@ -9,7 +9,7 @@ import java.util.List;
 public class Paths {
     public static HashMap<String, List<String>> MAPPING = new HashMap<String, List<String>>(){
         {
-            put("/form", Arrays.asList("GET", "POST"));
+            put("/form", Arrays.asList("GET", "POST", "PUT"));
             put("/method_options", Arrays.asList("GET"));
         }
     };

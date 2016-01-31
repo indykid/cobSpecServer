@@ -31,7 +31,7 @@ public class ResponseController implements Controller {
     }
 
     public Request parse(InputStream inputStream) {
-        return parser.parse(inputStream);
+        return parser.parseRequestLine(inputStream);
     }
 
 

@@ -12,7 +12,7 @@ public class RequestParserDouble extends RequestParser {
         return parsing;
     }
 
-    public Request parse(InputStream inputStream) {
+    public Request parseRequestLine(InputStream inputStream) {
         parsing = true;
         return new Request("some method", "some/path");
     }

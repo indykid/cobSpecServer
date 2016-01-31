@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 
 public class RequestParser {
 
-    public Request parse(InputStream inputStream) {
+    public Request parseRequestLine(InputStream inputStream) {
         String requestLine = getRequestLine(inputToReader(inputStream));
         return new Request(extractVerb(requestLine), extractPath(requestLine));
     }

@@ -23,7 +23,7 @@ public class RequestParserTest {
 
     @Test
     public void parsesRequestCorrectly() throws IOException {
-        Request request = new RequestParser().parse(inputStream);
+        Request request = new RequestParser().parseRequestLine(inputStream);
 
         assertEquals("GET", request.getMethod());
         assertEquals("/index.html", request.getPath());
