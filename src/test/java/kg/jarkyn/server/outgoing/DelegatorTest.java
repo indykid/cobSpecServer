@@ -5,6 +5,7 @@ import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.responders.DirectoryListingResponder;
 import kg.jarkyn.server.responders.FileReadResponder;
 import kg.jarkyn.server.responders.FourOhFourResponder;
+import kg.jarkyn.server.responders.POSTResponder;
 import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,5 +40,13 @@ public class DelegatorTest {
         Request request = new Request("GET", "/non_existent_path");
 
         assertTrue(delegator.chooseResponder(request) instanceof FourOhFourResponder);
+    }
+
+    @Test
+    public void returnsPostResponder() {
+        Request request = new Request("POST", "/form");
+
+        assertTrue(delegator.chooseResponder(request) instanceof POSTResponder);
+
     }
 }

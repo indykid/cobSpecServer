@@ -4,6 +4,7 @@ import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.responders.DirectoryListingResponder;
 import kg.jarkyn.server.responders.FileReadResponder;
 import kg.jarkyn.server.responders.FourOhFourResponder;
+import kg.jarkyn.server.responders.POSTResponder;
 import kg.jarkyn.server.utils.Paths;
 import kg.jarkyn.server.utils.PublicResource;
 
@@ -16,14 +17,21 @@ public class Delegator {
     }
 
     public Responder chooseResponder(Request request) {
+
         if (isNotFound(request)) {
             return new FourOhFourResponder();
-        }
 
-        if (isDirectory(request.getPath())) {
+        } else if (isDirectory(request.getPath())) {
             return new DirectoryListingResponder(publicResource);
+
+        } else if (isPOST(request)) {
+            return new POSTResponder();
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean isPOST(Request request) {
+        return request.getMethod().equals("POST");
     }
 
     private boolean isNotFound(Request request) {
@@ -34,4 +42,5 @@ public class Delegator {
     private boolean isDirectory(String requestPath) {
         return publicResource.isDirectory(requestPath);
     }
+
 }

@@ -4,13 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static kg.jarkyn.server.utils.Methods.GET;
-import static kg.jarkyn.server.utils.Methods.POST;
-
 public class Paths {
-    public static HashMap<String, List<Methods>> MAPPING = new HashMap<String, List<Methods>>(){
+    public static HashMap<String, List<String>> MAPPING = new HashMap<String, List<String>>(){
         {
-            put("/form", Arrays.asList(GET, POST));
+            put("/form", Arrays.asList("GET", "POST"));
         }
     };
 
