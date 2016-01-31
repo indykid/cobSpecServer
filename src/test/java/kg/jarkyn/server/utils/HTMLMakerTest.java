@@ -1,4 +1,4 @@
-package kg.jarkyn.server.outgoing;
+package kg.jarkyn.server.utils;
 
 import org.junit.Test;
 

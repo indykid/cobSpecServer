@@ -1,7 +1,9 @@
-package kg.jarkyn.server.outgoing;
+package kg.jarkyn.server.responders;
 
 import kg.jarkyn.server.incoming.Request;
-import kg.jarkyn.server.resource.PublicResource;
+import kg.jarkyn.server.outgoing.Responder;
+import kg.jarkyn.server.outgoing.Response;
+import kg.jarkyn.server.utils.PublicResource;
 
 public class FileReadResponder extends Responder {
     private PublicResource publicResource;

@@ -1,4 +1,4 @@
-package kg.jarkyn.server.outgoing;
+package kg.jarkyn.server.utils;
 
 public class HTMLMaker {
     private static String linkElementTemplate = "<a href=\"%s\">%s</a>";

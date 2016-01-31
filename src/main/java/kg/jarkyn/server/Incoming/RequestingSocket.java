@@ -1,6 +1,4 @@
-package kg.jarkyn.server;
-
-import kg.jarkyn.server.incoming.Requester;
+package kg.jarkyn.server.incoming;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,5 +27,10 @@ public class RequestingSocket implements Requester {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        socket.close();
     }
 }

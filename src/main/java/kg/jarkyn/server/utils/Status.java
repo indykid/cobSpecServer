@@ -1,4 +1,4 @@
-package kg.jarkyn.server;
+package kg.jarkyn.server.utils;
 
 public enum Status {
     SUCCESS("200", "OK"),

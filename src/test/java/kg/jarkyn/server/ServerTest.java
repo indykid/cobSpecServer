@@ -1,6 +1,7 @@
 package kg.jarkyn.server;
 
 import kg.jarkyn.server.doubles.RequestingSocketDouble;
+import kg.jarkyn.server.incoming.ReceivingSocket;
 import kg.jarkyn.server.incoming.Requester;
 import kg.jarkyn.server.outgoing.Controller;
 import kg.jarkyn.server.outgoing.Response;

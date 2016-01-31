@@ -1,7 +1,9 @@
 package kg.jarkyn.server.outgoing;
 
 import kg.jarkyn.server.incoming.Request;
-import kg.jarkyn.server.resource.PublicResource;
+import kg.jarkyn.server.responders.FileReadResponder;
+import kg.jarkyn.server.utils.PublicResource;
+import kg.jarkyn.server.responders.DirectoryListingResponder;
 
 public class Delegator {
 

@@ -3,7 +3,7 @@ package kg.jarkyn.server.doubles;
 import kg.jarkyn.server.incoming.Request;
 import kg.jarkyn.server.outgoing.Delegator;
 import kg.jarkyn.server.outgoing.Responder;
-import kg.jarkyn.server.resource.PublicResource;
+import kg.jarkyn.server.utils.PublicResource;
 
 public class DelegatorDouble extends Delegator {
     private boolean delegating;

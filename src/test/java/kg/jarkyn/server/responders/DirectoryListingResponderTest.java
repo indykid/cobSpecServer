@@ -1,8 +1,8 @@
-package kg.jarkyn.server.outgoing;
+package kg.jarkyn.server.responders;
 
 import kg.jarkyn.server.fixtures.PublicDirectoryFixture;
 import kg.jarkyn.server.incoming.Request;
-import kg.jarkyn.server.resource.PublicResource;
+import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
