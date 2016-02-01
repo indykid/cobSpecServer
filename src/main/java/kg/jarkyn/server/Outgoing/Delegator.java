@@ -18,6 +18,9 @@ public class Delegator {
         if (isNotFound(request)) {
             return new FourOhFourResponder();
 
+        } else if (isOPTIONS(request)) {
+            return new OptionsResponder();
+
         } else if (isNotAllowed(request)) {
             return new MethodNotAllowedResponder();
 
@@ -34,6 +37,10 @@ public class Delegator {
             return new PUTResponder();
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean isOPTIONS(Request request) {
+        return request.getMethod().equals("OPTIONS");
     }
 
     private boolean hasParams(Request request) {

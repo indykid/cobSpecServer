@@ -66,4 +66,11 @@ public class DelegatorTest {
 
         assertTrue(delegator.chooseResponder(request) instanceof ParamsDecodeResponder);
     }
+
+    @Test
+    public void returnsOptionsResponder() {
+        Request request = new Request("OPTIONS", "/form", "");
+
+        assertTrue(delegator.chooseResponder(request) instanceof OptionsResponder);
+    }
 }
