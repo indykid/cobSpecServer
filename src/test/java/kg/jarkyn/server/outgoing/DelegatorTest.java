@@ -73,4 +73,12 @@ public class DelegatorTest {
 
         assertTrue(delegator.chooseResponder(request) instanceof OptionsResponder);
     }
+
+    @Test
+    public void returnsRedirectResponder() {
+        Request request = new Request("GET", "/redirect", "");
+
+        assertTrue(delegator.chooseResponder(request) instanceof RedirectResponder);
+
+    }
 }

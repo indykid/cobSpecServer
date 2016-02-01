@@ -24,6 +24,9 @@ public class Delegator {
         } else if (isNotAllowed(request)) {
             return new MethodNotAllowedResponder();
 
+        } else if (isRedirect(request)) {
+            return new RedirectResponder();
+
         } else if (isDirectory(request.getPath())) {
             return new DirectoryListingResponder(publicResource);
 
@@ -37,6 +40,10 @@ public class Delegator {
             return new PUTResponder();
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean isRedirect(Request request) {
+        return request.getPath().equals("/redirect");
     }
 
     private boolean isOPTIONS(Request request) {
