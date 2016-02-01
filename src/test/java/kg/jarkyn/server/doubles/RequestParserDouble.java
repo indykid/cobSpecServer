@@ -14,6 +14,6 @@ public class RequestParserDouble extends RequestParser {
 
     public Request parseRequestLine(InputStream inputStream) {
         parsing = true;
-        return new Request("some method", "some/path");
+        return new Request("irrelevant", "irrelevant");
     }
 }

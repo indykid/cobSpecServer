@@ -50,23 +50,21 @@ public class ResponseControllerTest {
     }
 
     @Test
-    public void sendsResponse() {
-        RequestingSocketDouble requester = new RequestingSocketDouble();
-        Response response = new Response("status", "header", "body".getBytes());
-        String expected = new String(response.getByteContent());
-
-        controller.sendResponse(requester, response);
-
-        assertEquals(expected, requester.getOutputStream().toString());
-    }
-
-    @Test
     public void preparesResponse() {
         RequestingSocketDouble requester = new RequestingSocketDouble();
 
         Response response = controller.prepareResponse(requester);
 
-        String actual = new String(response.getByteContent());
-        assertEquals("status\r\nheaders\r\n\r\nbody", actual);
+        assertEquals("status\r\nheaders\r\n\r\nbody", response.getContent());
+    }
+
+    @Test
+    public void sendsResponse() {
+        RequestingSocketDouble requester = new RequestingSocketDouble();
+        Response response = new Response("status", "header", "body".getBytes());
+
+        controller.sendResponse(requester, response);
+
+        assertEquals(response.getContent(), requester.getOutputStream().toString());
     }
 }

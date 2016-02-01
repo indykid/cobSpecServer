@@ -40,7 +40,7 @@ public class DelegatorTest {
     }
 
     @Test
-    public void returnsPostResponder() {
+    public void returnsPOSTResponder() {
         Request request = new Request("POST", "/form");
 
         assertTrue(delegator.chooseResponder(request) instanceof POSTResponder);
