@@ -34,7 +34,7 @@ public class Delegator {
             return new ParamsDecodeResponder();
 
         } else if (isPOST(request)) {
-            return new POSTResponder();
+            return new POSTResponder(publicResource);
 
         } else if (isPUT(request)) {
             return new PUTResponder();

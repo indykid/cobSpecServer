@@ -14,7 +14,7 @@ public class PublicResource {
         this.path = path;
     }
 
-    private String fullPathFor(String requestPath) {
+    public String fullPathFor(String requestPath) {
         return path + requestPath;
     }
 

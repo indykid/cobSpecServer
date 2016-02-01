@@ -13,6 +13,8 @@ public class Request {
         this.method = method;
         this.path = path;
         this.params = params;
+        this.headers = new HashMap<>();
+        this.body = "";
     }
     public Request(String method,
                    String path,
@@ -21,9 +23,9 @@ public class Request {
                    String params) {
         this.method = method;
         this.path = path;
+        this.params = params;
         this.headers = headers;
         this.body = body;
-        this.params = params;
     }
 
     public String getPath() {
