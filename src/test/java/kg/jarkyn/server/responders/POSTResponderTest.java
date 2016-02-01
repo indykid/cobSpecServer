@@ -1,6 +1,7 @@
 package kg.jarkyn.server.responders;
 
 import kg.jarkyn.server.incoming.Request;
+import kg.jarkyn.server.outgoing.Response;
 import kg.jarkyn.server.utils.PublicResource;
 import org.junit.After;
 import org.junit.Before;
@@ -31,10 +32,11 @@ public class POSTResponderTest {
 
     @Test
     public void createsResource() throws IOException {
-        responder.respond(new Request("POST", "/form", new HashMap<>(), "new=content", ""));
+        Response response = responder.respond(new Request("POST", "/form", new HashMap<>(), "new=content", ""));
         byte[] body = Files.readAllBytes(Paths.get(publicDirectoryPath + "/form"));
 
         assertArrayEquals("new=content".getBytes(), body);
+        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\nnew=content", response.getContent());
     }
 
     @After

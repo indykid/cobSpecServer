@@ -3,12 +3,28 @@ package kg.jarkyn.server.incoming;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class RequestParser {
 
     public Request parseRequestLine(InputStream inputStream) {
-        String requestLine = getRequestLine(inputToReader(inputStream));
-        return new Request(extractMethod(requestLine), extractPath(requestLine), extractParams(requestLine));
+        BufferedReader reader = inputToReader(inputStream);
+        String requestLine = getRequestLine(reader);
+        return new Request(extractMethod(requestLine),
+                           extractPath(requestLine),
+                           extractParams(requestLine));
+    }
+
+    public Request parse(InputStream inputStream) {
+        BufferedReader reader = inputToReader(inputStream);
+        String requestLine = getRequestLine(reader);
+        return new Request(extractMethod(requestLine),
+                           extractPath(requestLine),
+                           extractHeaders(reader),
+                           extractBody(reader),
+                           extractParams(requestLine));
     }
 
     private String extractMethod(String requestLine) {
@@ -73,6 +89,54 @@ public class RequestParser {
     private String getRequestLine(BufferedReader reader) {
         try {
             return reader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private HashMap<String, String> extractHeaders(BufferedReader reader) {
+        int fieldPosition = 0;
+        int valuePosition = 1;
+        HashMap<String, String> headers = new HashMap<>();
+
+        readHeaderLines(reader)
+                .stream()
+                .filter(line -> line.contains(":"))
+                .forEach(line -> {
+                    String[] parts = line.split(":", 2);
+                    headers.put(parts[fieldPosition].trim(), parts[valuePosition].trim());
+                });
+
+        return headers;
+    }
+
+    private String extractBody(BufferedReader reader) {
+        try {
+            String body = reader.readLine();
+            reader.close();
+            if (body != null) {
+                return body;
+            } else {
+                return "";
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private List<String> readHeaderLines(BufferedReader reader) {
+        List<String> lines = new ArrayList<>();
+        String line;
+
+        try {
+            while ((line = reader.readLine()) != null) {
+                if (line.isEmpty()) {
+                    break;
+                }
+                lines.add(line);
+            }
+            return lines;
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

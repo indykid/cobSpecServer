@@ -8,6 +8,7 @@ import kg.jarkyn.server.utils.PublicResource;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 
 public class POSTResponder extends Responder {
     private PublicResource publicResource;
@@ -18,18 +19,23 @@ public class POSTResponder extends Responder {
 
     @Override
     public Response respond(Request request) {
-        createResource(request);
-        return new Response(successStatusLine(), "", request.getBody().getBytes());
+        File file = createResource(request);
+        try {
+            return new Response(successStatusLine(), "", Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void createResource(Request request) {
+    private File createResource(Request request) {
         try {
             File file = new File(publicResource.fullPathFor(request.getPath()));
             PrintWriter writer = new PrintWriter(file);
             writer.write(request.getBody());
             writer.close();
+            return file;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

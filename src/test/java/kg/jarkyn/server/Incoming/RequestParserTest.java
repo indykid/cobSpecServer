@@ -3,8 +3,8 @@ package kg.jarkyn.server.incoming;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,12 +18,24 @@ public class RequestParserTest {
     private InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
     @Test
-    public void parsesRequest() throws IOException {
+    public void parsesRequestLine() {
         Request request = new RequestParser().parseRequestLine(inputStream);
 
         assertEquals("POST", request.getMethod());
         assertEquals("/", request.getPath());
         assertEquals("AuthId = SOMEKEY\nAction = SomeAction\n", request.getParams());
+    }
+
+    @Test
+    public void parsesRequest() {
+        Request request = new RequestParser().parse(inputStream);
+
+        assertEquals("POST", request.getMethod());
+        assertEquals("/", request.getPath());
+        assertEquals("AuthId = SOMEKEY\nAction = SomeAction\n", request.getParams());
+        assertEquals("body", request.getBody());
+        assertEquals(headersMap(), request.getHeaders());
+
     }
 
     @Test
@@ -35,6 +47,16 @@ public class RequestParserTest {
         Request request = new RequestParser().parseRequestLine(inputStream);
 
         assertEquals(paramsWithEntities(), request.getParams());
+    }
+
+    private HashMap<String, String> headersMap() {
+        return new HashMap<String, String>(){
+            {
+                put("Connection", "keep-alive");
+                put("Accept-Language", "en-US,en");
+                put("Accept", "text/html");
+            }
+        };
     }
 
     private String paramsWithEntities() {
