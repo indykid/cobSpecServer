@@ -19,7 +19,7 @@ public class POSTResponder extends Responder {
     @Override
     public Response respond(Request request) {
         createResource(request);
-        return new Response(successStatusLine(), "", "".getBytes());
+        return new Response(successStatusLine(), "", request.getBody().getBytes());
     }
 
     private void createResource(Request request) {

@@ -37,7 +37,7 @@ public class Delegator {
             return new POSTResponder(publicResource);
 
         } else if (isPUT(request)) {
-            return new PUTResponder();
+            return new PUTResponder(publicResource);
         }
         return new FileReadResponder(publicResource);
     }
