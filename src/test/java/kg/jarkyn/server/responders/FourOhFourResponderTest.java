@@ -15,7 +15,7 @@ public class FourOhFourResponderTest {
     public void responds() {
         FourOhFourResponder responder = new FourOhFourResponder();
 
-        assertEquals("HTTP/1.1 404 Not Found\r\n\r\n\r\n", responder.respond(new Request("GET", "/foobar")).getContent
+        assertEquals("HTTP/1.1 404 Not Found\r\n\r\n\r\n", responder.respond(new Request("GET", "/foobar", "")).getContent
                 ());
     }
 }

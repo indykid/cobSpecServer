@@ -10,6 +10,6 @@ public class PUTResponderTest {
     public void responds() {
         PUTResponder responder = new PUTResponder();
 
-        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", responder.respond(new Request("PUT", "/form")).getContent());
+        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", responder.respond(new Request("PUT", "/form", "")).getContent());
     }
 }

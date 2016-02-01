@@ -10,6 +10,6 @@ public class POSTResponderTest {
     public void responds() {
         POSTResponder responder = new POSTResponder();
 
-        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", responder.respond(new Request("POST", "/form")).getContent());
+        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", responder.respond(new Request("POST", "/form", "")).getContent());
     }
 }

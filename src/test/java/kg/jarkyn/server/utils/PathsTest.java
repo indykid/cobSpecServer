@@ -19,11 +19,11 @@ public class PathsTest {
 
     @Test
     public void isNotAllowed() {
-        assertTrue(Paths.isNotAllowed(new Request("POST", "/method_options")));
+        assertTrue(Paths.isNotAllowed(new Request("POST", "/method_options", "")));
     }
 
     @Test
     public void isAllowed() {
-        assertFalse(Paths.isNotAllowed(new Request("GET", "/method_options")));
+        assertFalse(Paths.isNotAllowed(new Request("GET", "/method_options", "")));
     }
 }

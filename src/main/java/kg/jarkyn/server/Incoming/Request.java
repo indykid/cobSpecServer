@@ -6,18 +6,19 @@ public class Request {
     private final String method;
     private final String path;
     private HashMap<String, String> headers;
-    private HashMap<String, String> params;
+    private String params;
     private String body;
 
-    public Request(String method, String path) {
+    public Request(String method, String path, String params) {
         this.method = method;
         this.path = path;
+        this.params = params;
     }
     public Request(String method,
                    String path,
                    HashMap<String, String> headers,
                    String body,
-                   HashMap<String, String> params) {
+                   String params) {
         this.method = method;
         this.path = path;
         this.headers = headers;
@@ -41,7 +42,7 @@ public class Request {
         return body;
     }
 
-    public HashMap<String, String> getParams() {
+    public String getParams() {
         return params;
     }
 }

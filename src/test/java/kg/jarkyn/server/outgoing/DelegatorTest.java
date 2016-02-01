@@ -20,43 +20,50 @@ public class DelegatorTest {
 
     @Test
     public void returnsFileReadResponder() {
-        Request request = new Request("GET", "/file1");
+        Request request = new Request("GET", "/file1", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof FileReadResponder);
     }
 
     @Test
     public void returnsDirectoryResponder() {
-        Request request = new Request("GET", "/");
+        Request request = new Request("GET", "/", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof DirectoryListingResponder);
     }
 
     @Test
     public void returnsFourOhFourResponder() {
-        Request request = new Request("GET", "/non_existent_path");
+        Request request = new Request("GET", "/non_existent_path", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof FourOhFourResponder);
     }
 
     @Test
     public void returnsPOSTResponder() {
-        Request request = new Request("POST", "/form");
+        Request request = new Request("POST", "/form", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof POSTResponder);
     }
 
     @Test
     public void returnsMethodNotAllowedResponder() {
-        Request request = new Request("POST", "/file1");
+        Request request = new Request("POST", "/file1", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof MethodNotAllowedResponder);
     }
 
     @Test
     public void returnsPUTResponder() {
-        Request request = new Request("PUT", "/form");
+        Request request = new Request("PUT", "/form", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof PUTResponder);
+    }
+
+    @Test
+    public void returnsParamsDecodeResponder() {
+        Request request = new Request("GET", "/parameters", "AuthId=SOMEKEY&Action=SomeAction");
+
+        assertTrue(delegator.chooseResponder(request) instanceof ParamsDecodeResponder);
     }
 }

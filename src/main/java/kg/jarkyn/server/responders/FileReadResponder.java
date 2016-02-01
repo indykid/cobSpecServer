@@ -10,7 +10,6 @@ public class FileReadResponder extends Responder {
     private PublicResource publicResource;
 
     public FileReadResponder(PublicResource publicResource) {
-
         this.publicResource = publicResource;
     }
 

@@ -15,7 +15,7 @@ public class FileReadResponderTest {
         FileReadResponder responder = new FileReadResponder(publicResource);
         String expected = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nfile1 contents";
 
-        assertEquals(expected, responder.respond(new Request("GET", "/file1"))
+        assertEquals(expected, responder.respond(new Request("GET", "/file1", ""))
                 .getContent());
     }
 }

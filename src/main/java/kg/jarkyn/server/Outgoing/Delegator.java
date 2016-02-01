@@ -24,6 +24,9 @@ public class Delegator {
         } else if (isDirectory(request.getPath())) {
             return new DirectoryListingResponder(publicResource);
 
+        } else if (hasParams(request)) {
+            return new ParamsDecodeResponder();
+
         } else if (isPOST(request)) {
             return new POSTResponder();
 
@@ -31,6 +34,10 @@ public class Delegator {
             return new PUTResponder();
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean hasParams(Request request) {
+        return !request.getParams().isEmpty();
     }
 
     private boolean isPUT(Request request) {

@@ -13,7 +13,7 @@ public class DirectoryListingResponderTest {
         PublicResource publicResource = new PublicResource(PublicDirectoryFixture.publicDirectoryPath);
         DirectoryListingResponder responder = new DirectoryListingResponder(publicResource);
 
-        String response = responder.respond(new Request("GET", "/")).getContent();
+        String response = responder.respond(new Request("GET", "/", "")).getContent();
 
         assertEquals(directoryListingResponse(), response);
     }

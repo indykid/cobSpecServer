@@ -10,22 +10,34 @@ import static org.junit.Assert.assertEquals;
 
 public class RequestParserTest {
 
-    private final String input = "GET /index.html HTTP/1.1\n" +
-                                 "User-Agent: Mozilla/5.0 (Macintosh; " +
-                                 "Intel Mac OS X 10.8; rv:20.0)\n" +
-                                 " Gecko/20100101 Firefox/20.0\n" +
-                                 "Host: en.wikipedia.org\n" +
-                                 "Connection: keep-alive\n" +
-                                 "Accept-Language: en-US,en;q=0.5\n" +
-                                 "Accept-Encoding: gzip, deflate\n" +
-                                 "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+    private final String input = "POST /?AuthId=SOMEKEY&Action=SomeAction HTTP/1.1\r\n" +
+                                 "Connection: keep-alive\r\n" +
+                                 "Accept-Language: en-US,en\r\n" +
+                                 "Accept: text/html\r\n\r\n" +
+                                 "body";
     private InputStream inputStream = new ByteArrayInputStream(input.getBytes());
 
     @Test
-    public void parsesRequestCorrectly() throws IOException {
+    public void parsesRequest() throws IOException {
         Request request = new RequestParser().parseRequestLine(inputStream);
 
-        assertEquals("GET", request.getMethod());
-        assertEquals("/index.html", request.getPath());
+        assertEquals("POST", request.getMethod());
+        assertEquals("/", request.getPath());
+        assertEquals("AuthId = SOMEKEY\nAction = SomeAction\n", request.getParams());
+    }
+
+    @Test
+    public void parsesEncodedParams() {
+        String input = "GET /parameters?variable_1=Operators%20%3C%2C%20%3E%2C%20%3D%2C%20!%3D%3B%20%2B%2C%20-%2C%20" +
+                "*%2C%20%26%2C%20%40%2C%20%23%2C%20%24%2C%20%5B%2C%20%5D%3A%20%22is%20that%20all%22%3F&variable_2" +
+                "=stuff HTTP/1.1";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
+        Request request = new RequestParser().parseRequestLine(inputStream);
+
+        assertEquals(paramsWithEntities(), request.getParams());
+    }
+
+    private String paramsWithEntities() {
+        return "variable_1 = Operators <, >, =, !=; +, -, *, &, @, #, $, [, ]: \"is that all\"?\nvariable_2 = stuff\n";
     }
 }
