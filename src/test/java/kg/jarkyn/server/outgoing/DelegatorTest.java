@@ -79,6 +79,12 @@ public class DelegatorTest {
         Request request = new Request("GET", "/redirect", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof RedirectResponder);
+    }
 
+    @Test
+    public void returnsDeleteResponder() {
+        Request request = new Request("DELETE", "/form", "");
+
+        assertTrue(delegator.chooseResponder(request) instanceof DELETEResponder);
     }
 }

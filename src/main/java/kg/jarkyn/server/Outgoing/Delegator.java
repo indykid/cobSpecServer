@@ -38,8 +38,15 @@ public class Delegator {
 
         } else if (isPUT(request)) {
             return new PUTResponder(publicResource);
+
+        } else if (isDELETE(request)) {
+            return new DELETEResponder(publicResource);
         }
         return new FileReadResponder(publicResource);
+    }
+
+    private boolean isDELETE(Request request) {
+        return request.getMethod().equals("DELETE");
     }
 
     private boolean isRedirect(Request request) {
