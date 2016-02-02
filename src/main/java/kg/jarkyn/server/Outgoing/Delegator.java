@@ -18,8 +18,14 @@ public class Delegator {
         if (isNotFound(request)) {
             return new FourOhFourResponder();
 
+        } else if (isProtected(request)) {
+            return new AuthResponder();
+
         } else if (isOPTIONS(request)) {
             return new OptionsResponder();
+
+//        } else if (isPartial(request)) {
+//            return new PartialContentResponder(publicResource);
 
         } else if (isNotAllowed(request)) {
             return new MethodNotAllowedResponder();
@@ -45,8 +51,16 @@ public class Delegator {
         return new FileReadResponder(publicResource);
     }
 
+    private boolean isProtected(Request request) {
+        return request.getPath().equals("/logs");
+    }
+
     private boolean isDELETE(Request request) {
         return request.getMethod().equals("DELETE");
+    }
+
+    private boolean isPartial(Request request) {
+        return request.getHeaders().containsKey("Range");
     }
 
     private boolean isRedirect(Request request) {

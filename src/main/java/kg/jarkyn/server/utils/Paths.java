@@ -13,6 +13,7 @@ public class Paths {
             put("/method_options", Arrays.asList("GET", "HEAD", "POST", "OPTIONS", "PUT"));
             put("/parameters", Arrays.asList("GET", "OPTIONS"));
             put("/redirect", Arrays.asList("GET", "OPTIONS"));
+            put("/logs", Arrays.asList("GET"));
         }
     };
 

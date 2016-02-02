@@ -7,6 +7,8 @@ import kg.jarkyn.server.utils.PublicResource;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.assertTrue;
 
 public class DelegatorTest {
@@ -86,5 +88,22 @@ public class DelegatorTest {
         Request request = new Request("DELETE", "/form", "");
 
         assertTrue(delegator.chooseResponder(request) instanceof DELETEResponder);
+    }
+
+    @Test
+    public void returnsAuthResponder() {
+        Request request = new Request("GET", "/logs", "");
+
+        assertTrue(delegator.chooseResponder(request) instanceof AuthResponder);
+    }
+
+    @Test
+    public void returnsPartialContentResponder() {
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("Range", "bytes=0-3");
+        Request request = new Request("GET", "/file1", headers, "", "");
+
+        assertTrue(delegator.chooseResponder(request) instanceof PartialContentResponder);
+
     }
 }

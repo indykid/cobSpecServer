@@ -111,17 +111,18 @@ public class RequestParser {
     }
 
     private String extractBody(BufferedReader reader) {
-        try {
-            String body = reader.readLine();
-            reader.close();
-            if (body != null) {
-                return body;
-            } else {
-                return "";
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            String body = reader.readLine();
+////            reader.close();
+//            if (body != null) {
+//                return body;
+//            } else {
+//                return "";
+//            }
+//        } catch (IOException e) {
+////            throw new RuntimeException(e);
+            return "";
+//        }
     }
 
     private List<String> readHeaderLines(BufferedReader reader) {
