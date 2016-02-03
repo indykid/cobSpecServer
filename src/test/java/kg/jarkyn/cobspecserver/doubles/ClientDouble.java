@@ -5,11 +5,14 @@ import kg.jarkyn.cobspecserver.Client;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
-public class ClientDouble extends Client {
+public class ClientDouble implements Client {
 
-    private OutputStream outputStream = new ByteArrayOutputStream();
+    private OutputStream outputStream;
 
-    @Override
+    public ClientDouble() {
+        this.outputStream = new ByteArrayOutputStream();
+    }
+
     public OutputStream getOutputStream() {
         return outputStream;
     }

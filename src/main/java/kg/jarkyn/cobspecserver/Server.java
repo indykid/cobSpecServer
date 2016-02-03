@@ -2,11 +2,11 @@ package kg.jarkyn.cobspecserver;
 
 public class Server {
     private Listener listener;
-    private ResponsePreparer responsePreparer;
+    private ResponseController responseController;
 
-    public Server(Listener listener, ResponsePreparer responsePreparer) {
+    public Server(Listener listener, ResponseController responseController) {
         this.listener = listener;
-        this.responsePreparer = responsePreparer;
+        this.responseController = responseController;
     }
 
     public void run() {
@@ -24,6 +24,6 @@ public class Server {
     }
 
     private void respond(Client client) {
-        responsePreparer.respond(client);
+        responseController.respond(client);
     }
 }

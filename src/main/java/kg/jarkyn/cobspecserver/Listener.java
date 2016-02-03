@@ -1,13 +1,7 @@
 package kg.jarkyn.cobspecserver;
 
-public class Listener {
-    private boolean accepting = true;
+public interface Listener {
+    Client accept();
 
-    public Client accept() {
-        return null;
-    }
-
-    public boolean isAccepting() {
-        return accepting;
-    }
+    boolean isAccepting();
 }

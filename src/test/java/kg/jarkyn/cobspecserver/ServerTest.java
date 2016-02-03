@@ -2,18 +2,24 @@ package kg.jarkyn.cobspecserver;
 
 import kg.jarkyn.cobspecserver.doubles.ClientDouble;
 import kg.jarkyn.cobspecserver.doubles.ListenerDouble;
-import kg.jarkyn.cobspecserver.doubles.ResponsePreparerDouble;
+import kg.jarkyn.cobspecserver.doubles.ResponseControllerDouble;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class ServerTest {
 
+    private ClientDouble client;
+
+    @Before
+    public void setUp() throws Exception {
+        client = new ClientDouble();
+    }
+
     @Test
     public void satisfiesReceivedRequest() {
-        Client client = new ClientDouble();
-        ListenerDouble listener = new ListenerDouble(client);
-        Server server = new Server(listener, new ResponsePreparerDouble());
+        Server server = new Server(new ListenerDouble(client), new ResponseControllerDouble("hello"));
 
         server.satisfyRequest();
 
@@ -22,13 +28,11 @@ public class ServerTest {
 
     @Test
     public void runsUntilStopped() {
-        Client client = new ClientDouble();
-        ListenerDouble listener = new ListenerDouble(client, 2);
-        ResponsePreparerDouble responsePreparer = new ResponsePreparerDouble();
-        Server server = new Server(listener, responsePreparer);
+        ResponseControllerDouble responseControllerDouble = new ResponseControllerDouble("irrelevant");
+        Server server = new Server(new ListenerDouble(client, 2), responseControllerDouble);
 
         server.run();
 
-        assertEquals(2, responsePreparer.getTimesResponded());
+        assertEquals(2, responseControllerDouble.getTimesResponded());
     }
 }
