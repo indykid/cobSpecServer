@@ -1,6 +1,7 @@
 package kg.jarkyn.cobspecserver;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
@@ -18,5 +19,10 @@ public class ClientSocket implements Client {
           } catch (IOException e) {
                throw new RuntimeException(e);
           }
+     }
+
+     @Override
+     public InputStream getInputStream() {
+          return null;
      }
 }
