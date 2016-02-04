@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class ServerTest {
 
     private ClientDouble client;
+    private ResponseControllerDouble controller;
 
     @Before
     public void setUp() throws Exception {
@@ -19,20 +20,24 @@ public class ServerTest {
 
     @Test
     public void satisfiesReceivedRequest() {
-        Server server = new Server(new ListenerDouble(client), new ResponseControllerDouble("hello"));
+        Server server = new Server(new ListenerDouble(client), controllerWithResponse("hello"));
 
         server.satisfyRequest();
 
-        assertEquals("hello", client.getOutputStream().toString());
+        assertEquals("hello", client.getReceivedMessage());
     }
 
     @Test
     public void runsUntilStopped() {
-        ResponseControllerDouble responseControllerDouble = new ResponseControllerDouble("irrelevant");
-        Server server = new Server(new ListenerDouble(client, 2), responseControllerDouble);
+        controller = controllerWithResponse("irrelevant");
+        Server server = new Server(new ListenerDouble(client, 2), controller);
 
         server.run();
 
-        assertEquals(2, responseControllerDouble.getTimesResponded());
+        assertEquals(2, controller.getTimesResponded());
+    }
+
+    private ResponseControllerDouble controllerWithResponse(String hello) {
+        return new ResponseControllerDouble(hello);
     }
 }

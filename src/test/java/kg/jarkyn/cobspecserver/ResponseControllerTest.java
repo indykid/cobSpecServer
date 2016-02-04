@@ -13,9 +13,11 @@ public class ResponseControllerTest {
     private RequestParserDouble parser;
     private RouterDouble router;
     private ResponseController responseController;
+    private ClientDouble client;
 
     @Before
     public void setUp() throws Exception {
+        client = new ClientDouble();
         parser = new RequestParserDouble();
         router = new RouterDouble();
         responseController = new ResponseController(parser, router);
@@ -23,22 +25,20 @@ public class ResponseControllerTest {
 
     @Test
     public void parsesRequest() {
-        responseController.respond(new ClientDouble());
+        responseController.respond(client);
 
         assertTrue(parser.hasParsed());
     }
 
     @Test
     public void routes() {
-        responseController.respond(new ClientDouble());
+        responseController.respond(client);
 
         assertTrue(router.hasRouted());
     }
 
     @Test
     public void sendsResponse() {
-        ClientDouble client = new ClientDouble();
-
         responseController.respond(client);
 
         assertTrue(client.hasReceived());

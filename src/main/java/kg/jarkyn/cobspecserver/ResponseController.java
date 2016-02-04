@@ -9,14 +9,14 @@ public class ResponseController {
         this.router = router;
     }
 
-    public void respond(Client client) {
+    public void respond(ClientSocket client) {
         Request request = parser.parse(client.getInputStream());
         Responder responder = router.route(request);
         Response response = responder.respond();
         sendResponse(client, response);
     }
 
-    private void sendResponse(Client client, Response response) {
+    private void sendResponse(ClientSocket client, Response response) {
         StreamHandler.write(client.getOutputStream(), response.getBytes());
     }
 }

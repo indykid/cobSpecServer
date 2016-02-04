@@ -8,13 +8,7 @@ public class StreamHandler {
         try {
             outputStream.write(message);
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            throw new RuntimeException(e);
         }
     }
 }
