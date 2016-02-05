@@ -7,6 +7,10 @@ import kg.jarkyn.cobspecserver.Router;
 public class RouterDouble extends Router {
     private boolean routed;
 
+    public RouterDouble() {
+        super(null);
+    }
+
     @Override
     public Responder route(Request request) {
         routed = true;

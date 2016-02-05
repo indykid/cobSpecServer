@@ -18,7 +18,7 @@ public class Runner {
 
     private static ResponseController controller() {
         RequestParser parser = new RequestParser();
-        Router router = new Router();
+        Router router = new Router(new PublicResourceResponder());
         return new ResponseController(parser, router);
     }
 
