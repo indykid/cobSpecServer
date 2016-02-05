@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Runner {
+    private static final boolean KEEP_RUNNING = true;
+
     public static void main(String[] args) {
         server().run();
     }
@@ -19,7 +21,7 @@ public class Runner {
     }
 
     private static ListenerSocket listener() {
-        return new ListenerSocket(getServerSocket(), true);
+        return new ListenerSocket(getServerSocket(), KEEP_RUNNING);
     }
 
     private static ResponseController controller() {
