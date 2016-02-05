@@ -1,6 +1,9 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.middleware;
 
+import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.doubles.ResponderDouble;
+import kg.jarkyn.cobspecserver.middleware.Router;
+import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
 import org.junit.Before;
 import org.junit.Test;
 

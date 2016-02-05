@@ -1,4 +1,6 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.utils;
+
+import kg.jarkyn.cobspecserver.data.Request;
 
 import java.io.BufferedReader;
 import java.io.IOException;

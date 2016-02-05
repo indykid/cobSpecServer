@@ -1,7 +1,7 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.Responder;
-import kg.jarkyn.cobspecserver.Response;
+import kg.jarkyn.cobspecserver.responders.Responder;
+import kg.jarkyn.cobspecserver.data.Response;
 
 public class ResponderDouble implements Responder {
     @Override

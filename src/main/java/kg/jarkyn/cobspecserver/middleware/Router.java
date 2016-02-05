@@ -1,4 +1,7 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.middleware;
+
+import kg.jarkyn.cobspecserver.responders.Responder;
+import kg.jarkyn.cobspecserver.data.Request;
 
 import java.util.HashMap;
 import java.util.Map;

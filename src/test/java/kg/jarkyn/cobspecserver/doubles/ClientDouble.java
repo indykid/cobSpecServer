@@ -1,6 +1,6 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.ClientSocket;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

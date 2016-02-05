@@ -1,4 +1,11 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.middleware;
+
+import kg.jarkyn.cobspecserver.responders.Responder;
+import kg.jarkyn.cobspecserver.data.Request;
+import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
+import kg.jarkyn.cobspecserver.utils.RequestParser;
+import kg.jarkyn.cobspecserver.utils.StreamHandler;
 
 public class ResponseController {
     private RequestParser parser;

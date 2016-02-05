@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.data;
 
 public class Request {
     private String method;

@@ -1,8 +1,8 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.Request;
-import kg.jarkyn.cobspecserver.Responder;
-import kg.jarkyn.cobspecserver.Router;
+import kg.jarkyn.cobspecserver.data.Request;
+import kg.jarkyn.cobspecserver.responders.Responder;
+import kg.jarkyn.cobspecserver.middleware.Router;
 
 public class RouterDouble extends Router {
     private boolean routed;

@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.middleware;
 
 import kg.jarkyn.cobspecserver.doubles.ClientDouble;
 import kg.jarkyn.cobspecserver.doubles.RequestParserDouble;
