@@ -4,6 +4,7 @@ import kg.jarkyn.cobspecserver.middleware.ResponseController;
 import kg.jarkyn.cobspecserver.middleware.Router;
 import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
 import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
+import kg.jarkyn.cobspecserver.utils.PublicResource;
 import kg.jarkyn.cobspecserver.utils.RequestParser;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class Runner {
 
     private static ResponseController controller() {
         RequestParser parser = new RequestParser();
-        Router router = new Router(new PublicResourceResponder());
+        Router router = new Router(defaultResponder());
         return new ResponseController(parser, router);
     }
 
@@ -36,5 +37,10 @@ public class Runner {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static PublicResourceResponder defaultResponder() {
+        PublicResource publicResource = new PublicResource("/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public");
+        return new PublicResourceResponder(publicResource);
     }
 }

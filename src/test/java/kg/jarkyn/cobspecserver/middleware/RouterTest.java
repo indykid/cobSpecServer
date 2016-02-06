@@ -2,12 +2,12 @@ package kg.jarkyn.cobspecserver.middleware;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.doubles.ResponderDouble;
-import kg.jarkyn.cobspecserver.middleware.Router;
 import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class RouterTest {
 
@@ -17,7 +17,7 @@ public class RouterTest {
     @Before
     public void setUp() throws Exception {
         responder = new ResponderDouble();
-        router = new Router(new PublicResourceResponder());
+        router = new Router(new PublicResourceResponder(null));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class RouterTest {
     }
 
     @Test
-    public void defaultsToPublicResourceResponder() {
+    public void fallsBackToDefaultResponder() {
         Request request = new Request("GET", "/");
 
         assertTrue(router.route(request) instanceof PublicResourceResponder);

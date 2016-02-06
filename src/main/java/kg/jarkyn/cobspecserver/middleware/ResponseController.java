@@ -19,7 +19,7 @@ public class ResponseController {
     public void respond(ClientSocket client) {
         Request request = parser.parse(client.getInputStream());
         Responder responder = router.route(request);
-        Response response = responder.respond();
+        Response response = responder.respond(request);
         sendResponse(client, response);
     }
 

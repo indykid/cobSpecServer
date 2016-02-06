@@ -27,14 +27,11 @@ public class PublicResource {
 
     public byte[] readFile(String requestPath) {
         String fullPath = fullPathFor(requestPath);
-        if (contains(requestPath)) {
-            try {
-                return Files.readAllBytes((new File(fullPath)).toPath());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            return Files.readAllBytes((new File(fullPath)).toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return new byte[0];
     }
 
     public List<String> readDirectory(String requestPath) {
