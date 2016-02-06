@@ -24,6 +24,6 @@ public class ResponseController {
     }
 
     private void sendResponse(ClientSocket client, Response response) {
-        StreamHandler.write(client.getOutputStream(), response.getBytes());
+        StreamHandler.write(client.getOutputStream(), response.getByteContent());
     }
 }
