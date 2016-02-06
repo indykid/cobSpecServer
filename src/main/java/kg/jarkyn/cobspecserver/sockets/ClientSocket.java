@@ -21,6 +21,10 @@ public class ClientSocket {
      }
 
      public InputStream getInputStream() {
-          return null;
+          try {
+               return socket.getInputStream();
+          } catch (IOException e) {
+               throw new RuntimeException(e);
+          }
      }
 }
