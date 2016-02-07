@@ -2,6 +2,7 @@ package kg.jarkyn.cobspecserver;
 
 import kg.jarkyn.cobspecserver.middleware.ResponseController;
 import kg.jarkyn.cobspecserver.middleware.Router;
+import kg.jarkyn.cobspecserver.responders.FormResponder;
 import kg.jarkyn.cobspecserver.responders.OptionsResponder;
 import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
 import kg.jarkyn.cobspecserver.responders.RedirectResponder;
@@ -63,5 +64,6 @@ public class Runner {
     private static void setupRoutes(Router router) {
         router.registerRoute("/redirect", setupRedirectResponder());
         router.registerRoute("/method_options", new OptionsResponder());
+        router.registerRoute("/form", new FormResponder());
     }
 }
