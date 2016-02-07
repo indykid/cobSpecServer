@@ -34,4 +34,21 @@ public class PublicResourceResponderTest {
 
         assertEquals(expected, response.getContent());
     }
+
+    @Test
+    public void respondsWithDirectoryListing() {
+        request = new Request("GET", "/");
+
+        response = responder.respond(request);
+
+        assertEquals(directoryListingResponse(), response.getContent());
+    }
+
+    private String directoryListingResponse() {
+        String statusLine = "HTTP/1.1 200 OK\r\n";
+        String headers = "Content-Type: text/html" + "\r\n\r\n";
+        String html = "<a href=\"/file1\">file1</a>" +
+                      "<a href=\"/file2\">file2</a>" ;
+        return (statusLine + headers + html);
+    }
 }
