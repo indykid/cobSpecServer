@@ -15,6 +15,10 @@ public class Response {
         this(status, "", "".getBytes());
     }
 
+    public Response(String status, String headers) {
+        this(status, headers, "".getBytes());
+    }
+
     public byte[] getByteContent() {
         String header = formatStatus() + formatHeaders();
         return combine(header.getBytes(), body);

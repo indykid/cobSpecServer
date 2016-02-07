@@ -3,6 +3,7 @@ package kg.jarkyn.cobspecserver;
 import kg.jarkyn.cobspecserver.middleware.ResponseController;
 import kg.jarkyn.cobspecserver.middleware.Router;
 import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
+import kg.jarkyn.cobspecserver.responders.RedirectResponder;
 import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
 import kg.jarkyn.cobspecserver.utils.PublicResource;
 import kg.jarkyn.cobspecserver.utils.RequestParser;
@@ -27,7 +28,7 @@ public class Runner {
 
     private static ResponseController controller() {
         RequestParser parser = new RequestParser();
-        Router router = new Router(defaultResponder());
+        Router router = setupRouter();
         return new ResponseController(parser, router);
     }
 
@@ -39,8 +40,24 @@ public class Runner {
         }
     }
 
+    private static Router setupRouter() {
+        Router router = new Router(defaultResponder());
+        setupRoutes(router);
+        return router;
+    }
+
     private static PublicResourceResponder defaultResponder() {
         PublicResource publicResource = new PublicResource("/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public");
         return new PublicResourceResponder(publicResource);
+    }
+
+    private static RedirectResponder setupRedirectResponder() {
+        RedirectResponder redirectResponder = new RedirectResponder();
+        redirectResponder.registerRedirection("/redirect", "/");
+        return redirectResponder;
+    }
+
+    private static void setupRoutes(Router router) {
+        router.registerRoute("/redirect", setupRedirectResponder());
     }
 }
