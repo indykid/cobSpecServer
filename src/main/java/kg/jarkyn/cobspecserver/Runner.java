@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public class Runner {
-    private static final boolean KEEP_RUNNING = true;
+    private static boolean KEEP_RUNNING = true;
+    private static int defaultPort      = 5000;
+    private static String publicResourcePath = "/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public";
 
     public static void main(String[] args) {
         server().run();
@@ -34,7 +36,7 @@ public class Runner {
 
     private static ServerSocket getServerSocket() {
         try {
-            return new ServerSocket(5000);
+            return new ServerSocket(defaultPort);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -47,7 +49,7 @@ public class Runner {
     }
 
     private static PublicResourceResponder defaultResponder() {
-        PublicResource publicResource = new PublicResource("/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public");
+        PublicResource publicResource = new PublicResource(publicResourcePath);
         return new PublicResourceResponder(publicResource);
     }
 

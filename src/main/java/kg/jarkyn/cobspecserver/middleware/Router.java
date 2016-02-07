@@ -23,8 +23,8 @@ public class Router {
         }
     }
 
-    public void registerRoute(String path, Responder controller) {
-        routes.put(path, controller);
+    public void registerRoute(String path, Responder responder) {
+        routes.put(path, responder);
     }
 
     private boolean isValidPath(String path) {

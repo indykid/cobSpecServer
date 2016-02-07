@@ -6,6 +6,8 @@ import kg.jarkyn.cobspecserver.data.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+import static kg.jarkyn.cobspecserver.utils.Status.REDIRECT;
+
 public class RedirectResponder extends Responder {
     private static final String DOMAIN_URL = "http://localhost:5000";
     private Map<String, String> redirects = new HashMap();
@@ -25,7 +27,7 @@ public class RedirectResponder extends Responder {
     }
 
     private String status() {
-        return String.format(STATUS_TEMPLATE, 302, "Found");
+        return String.format(STATUS_TEMPLATE, REDIRECT.getCode(), REDIRECT.getDescription());
     }
 
     public void registerRedirection(String from, String to) {

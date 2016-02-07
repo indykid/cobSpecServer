@@ -44,7 +44,7 @@ public class PublicResourceResponder extends Responder {
     private class FileResponder extends Responder {
         @Override
         public Response respond(Request request) {
-            return new Response(successfulStatus(), headers(request), body(request));
+            return new Response(successStatus(), headers(request), body(request));
         }
 
         private String headers(Request request) {
@@ -65,7 +65,7 @@ public class PublicResourceResponder extends Responder {
                 html += HTMLMaker.makeLink("/" + fileName, fileName);
             }
             String headers = "Content-Type: text/html";
-            return new Response(successfulStatus(), headers, html.getBytes());
+            return new Response(successStatus(), headers, html.getBytes());
         }
     }
 }
