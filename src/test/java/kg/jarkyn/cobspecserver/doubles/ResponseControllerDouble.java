@@ -1,8 +1,8 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.*;
-
-import java.io.IOException;
+import kg.jarkyn.cobspecserver.ClientSocket;
+import kg.jarkyn.cobspecserver.ResponseController;
+import kg.jarkyn.cobspecserver.StreamHandler;
 
 public class ResponseControllerDouble extends ResponseController {
 
@@ -15,13 +15,9 @@ public class ResponseControllerDouble extends ResponseController {
     }
 
     @Override
-    public void respond(Client client) {
-        try {
-            timesResponded++;
-            client.getOutputStream().write(response.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void respond(ClientSocket client) {
+        timesResponded++;
+        StreamHandler.write(client.getOutputStream(), response.getBytes());
     }
 
     public int getTimesResponded() {

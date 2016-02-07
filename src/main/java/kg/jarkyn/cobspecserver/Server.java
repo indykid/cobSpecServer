@@ -1,10 +1,10 @@
 package kg.jarkyn.cobspecserver;
 
 public class Server {
-    private Listener listener;
+    private ListenerSocket listener;
     private ResponseController responseController;
 
-    public Server(Listener listener, ResponseController responseController) {
+    public Server(ListenerSocket listener, ResponseController responseController) {
         this.listener = listener;
         this.responseController = responseController;
     }
@@ -16,14 +16,14 @@ public class Server {
     }
 
     public void satisfyRequest() {
-        respond(listen());
+        respondTo(nextClient());
     }
 
-    private Client listen() {
+    private ClientSocket nextClient() {
         return listener.accept();
     }
 
-    private void respond(Client client) {
+    private void respondTo(ClientSocket client) {
         responseController.respond(client);
     }
 }

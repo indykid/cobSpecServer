@@ -3,16 +3,16 @@ package kg.jarkyn.cobspecserver;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class ListenerSocket implements Listener {
+public class ListenerSocket {
     private ServerSocket serverSocket;
-    private boolean accepting = true;
+    private boolean accepting;
 
-    public ListenerSocket(ServerSocket serverSocket) {
+    public ListenerSocket(ServerSocket serverSocket, boolean accepting) {
         this.serverSocket = serverSocket;
+        this.accepting = accepting;
     }
 
-    @Override
-    public Client accept() {
+    public ClientSocket accept() {
         try {
             return new ClientSocket(serverSocket.accept());
         } catch (IOException e) {
@@ -20,7 +20,6 @@ public class ListenerSocket implements Listener {
         }
     }
 
-    @Override
     public boolean isAccepting() {
         return accepting;
     }

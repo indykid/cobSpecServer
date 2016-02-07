@@ -1,24 +1,25 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.Client;
-import kg.jarkyn.cobspecserver.Listener;
+import kg.jarkyn.cobspecserver.ClientSocket;
+import kg.jarkyn.cobspecserver.ListenerSocket;
 
-public class ListenerDouble implements Listener {
-    private Client client;
+public class ListenerDouble extends ListenerSocket {
+    private ClientSocket client;
     private int allowedConnections;
     private int acceptedConnections = 0;
 
-    public ListenerDouble(ClientDouble client, int allowedConnections) {
+    public ListenerDouble(ClientSocket client, int allowedConnections) {
+        super(null, true);
         this.client = client;
         this.allowedConnections = allowedConnections;
     }
 
-    public ListenerDouble(ClientDouble client) {
+    public ListenerDouble(ClientSocket client) {
         this(client, Integer.MAX_VALUE);
     }
 
     @Override
-    public Client accept() {
+    public ClientSocket accept() {
         acceptedConnections++;
         return client;
     }
