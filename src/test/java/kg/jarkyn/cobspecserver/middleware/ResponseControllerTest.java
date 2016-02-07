@@ -43,4 +43,11 @@ public class ResponseControllerTest {
 
         assertTrue(client.hasReceived());
     }
+
+    @Test
+    public void disconnects() {
+        responseController.respond(client);
+
+        assertTrue(client.isClosed());
+    }
 }

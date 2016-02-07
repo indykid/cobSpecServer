@@ -9,6 +9,7 @@ import java.io.OutputStream;
 public class ClientDouble extends ClientSocket {
 
     private OutputStream outputStream;
+    private boolean closed;
 
     public ClientDouble() {
         super(null);
@@ -25,11 +26,20 @@ public class ClientDouble extends ClientSocket {
         return null;
     }
 
+    @Override
+    public void close() {
+        closed = true;
+    }
+
     public boolean hasReceived() {
         return !outputStream.toString().isEmpty();
     }
 
     public String getReceivedMessage() {
         return outputStream.toString();
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 }

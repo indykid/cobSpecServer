@@ -21,9 +21,14 @@ public class ResponseController {
         Responder responder = router.route(request);
         Response response = responder.respond(request);
         sendResponse(client, response);
+        disconnect(client);
     }
 
     private void sendResponse(ClientSocket client, Response response) {
         StreamHandler.write(client.getOutputStream(), response.getByteContent());
+    }
+
+    private void disconnect(ClientSocket client) {
+        client.close();
     }
 }
