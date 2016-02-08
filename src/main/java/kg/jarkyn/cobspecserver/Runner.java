@@ -16,9 +16,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Runner {
-    private static boolean KEEP_RUNNING = true;
-    private static int defaultPort      = 5000;
-    private static String publicResourcePath = "/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public";
+    private static final int DEFAULT_PORT = 5000;
+    private static final boolean KEEP_RUNNING = true;
+    private static final String DOMAIN = "http://localhost";
+    private static final String PUBLIC_RESOURCE_PATH = "/Users/Jarkyn/Projects/8thLight/JAVA/cob_spec/public";
 
     public static void main(String[] args) {
         server().run();
@@ -33,38 +34,40 @@ public class Runner {
     }
 
     private static ListenerSocket listener() {
-        return new ListenerSocket(getServerSocket(), KEEP_RUNNING);
+        return new ListenerSocket(setupServerSocket(), KEEP_RUNNING);
     }
 
     private static ResponseController controller() {
-        RequestParser parser = new RequestParser();
-        Router router = setupRouter();
-        return new ResponseController(parser, router);
+        return new ResponseController(new RequestParser(), setupRouter());
     }
 
-    private static ServerSocket getServerSocket() {
+    private static ServerSocket setupServerSocket() {
         try {
-            return new ServerSocket(defaultPort);
+            return new ServerSocket(DEFAULT_PORT);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private static Router setupRouter() {
-        Router router = new Router(defaultResponder());
+        Router router = new Router(setupDefaultResponder());
         setupRoutes(router);
         return router;
     }
 
-    private static PublicResourceResponder defaultResponder() {
-        PublicResource publicResource = new PublicResource(publicResourcePath);
+    private static PublicResourceResponder setupDefaultResponder() {
+        PublicResource publicResource = new PublicResource(PUBLIC_RESOURCE_PATH);
         return new PublicResourceResponder(publicResource);
     }
 
     private static RedirectResponder setupRedirectResponder() {
-        RedirectResponder redirectResponder = new RedirectResponder();
+        RedirectResponder redirectResponder = new RedirectResponder(domainUrl());
         redirectResponder.registerRedirection("/redirect", "/");
         return redirectResponder;
+    }
+
+    private static String domainUrl() {
+        return DOMAIN + ":" + DEFAULT_PORT;
     }
 
     private static void setupRoutes(Router router) {

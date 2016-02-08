@@ -9,8 +9,12 @@ import java.util.Map;
 import static kg.jarkyn.cobspecserver.utils.Status.REDIRECT;
 
 public class RedirectResponder extends Responder {
-    private static final String DOMAIN_URL = "http://localhost:5000";
     private Map<String, String> redirects = new HashMap();
+    private String domainUrl;
+
+    public RedirectResponder(String domainUrl) {
+        this.domainUrl = domainUrl;
+    }
 
     @Override
     public Response respond(Request request) {
@@ -23,7 +27,7 @@ public class RedirectResponder extends Responder {
     }
 
     private String urlFor(String path) {
-        return DOMAIN_URL + path;
+        return domainUrl + path;
     }
 
     private String status() {

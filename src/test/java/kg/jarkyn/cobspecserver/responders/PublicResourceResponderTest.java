@@ -44,6 +44,15 @@ public class PublicResourceResponderTest {
         assertEquals(directoryListingResponse(), response.getContent());
     }
 
+    @Test
+    public void respondsWithNotFound() {
+        request = new Request("GET", "/non_existing_resource");
+
+        response = responder.respond(request);
+
+        assertEquals("HTTP/1.1 404 Not Found\r\n\r\n\r\n", response.getContent());
+    }
+
     private String directoryListingResponse() {
         String statusLine = "HTTP/1.1 200 OK\r\n";
         String headers = "Content-Type: text/html" + "\r\n\r\n";
