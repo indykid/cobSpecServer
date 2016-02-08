@@ -12,6 +12,8 @@ import kg.jarkyn.cobspecserver.utils.RequestParser;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Runner {
     private static boolean KEEP_RUNNING = true;
@@ -23,7 +25,11 @@ public class Runner {
     }
 
     private static Server server() {
-        return new Server(listener(), controller());
+        return new Server(executor(), listener(), controller());
+    }
+
+    private static ExecutorService executor() {
+        return Executors.newFixedThreadPool(10);
     }
 
     private static ListenerSocket listener() {
