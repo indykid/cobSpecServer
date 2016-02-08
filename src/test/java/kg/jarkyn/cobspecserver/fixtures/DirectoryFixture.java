@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.fixtures;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.ClientSocket;
-import kg.jarkyn.cobspecserver.ListenerSocket;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
+import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
 
 public class ListenerDouble extends ListenerSocket {
     private ClientSocket client;

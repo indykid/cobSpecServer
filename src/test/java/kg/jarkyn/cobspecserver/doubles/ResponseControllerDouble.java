@@ -1,8 +1,8 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.ClientSocket;
-import kg.jarkyn.cobspecserver.ResponseController;
-import kg.jarkyn.cobspecserver.StreamHandler;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
+import kg.jarkyn.cobspecserver.middleware.ResponseController;
+import kg.jarkyn.cobspecserver.utils.StreamHandler;
 
 public class ResponseControllerDouble extends ResponseController {
 

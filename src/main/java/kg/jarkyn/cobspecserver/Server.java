@@ -1,5 +1,9 @@
 package kg.jarkyn.cobspecserver;
 
+import kg.jarkyn.cobspecserver.middleware.ResponseController;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
+import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
+
 public class Server {
     private ListenerSocket listener;
     private ResponseController responseController;

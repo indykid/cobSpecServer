@@ -1,7 +1,7 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.Request;
-import kg.jarkyn.cobspecserver.RequestParser;
+import kg.jarkyn.cobspecserver.data.Request;
+import kg.jarkyn.cobspecserver.utils.RequestParser;
 
 import java.io.InputStream;
 

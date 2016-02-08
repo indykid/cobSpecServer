@@ -1,4 +1,6 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.utils;
+
+import kg.jarkyn.cobspecserver.data.Request;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,23 +41,20 @@ public class RequestParser {
 
     private class RequestLineParser {
 
-        private final int FIRST_SEGMENT = 0;
-        private final int SECOND_SEGMENT = 1;
-
         public String extractMethod(String requestLine) {
-            return requestLine.split(" ")[FIRST_SEGMENT];
+            return requestLine.split(" ")[0];
         }
 
         public String extractPath(String requestLine) {
             String path = pathWithParams(requestLine);
             if (path.contains("?")) {
-                path = path.split("\\?", 2)[FIRST_SEGMENT];
+                path = path.split("\\?", 2)[0];
             }
             return path;
         }
 
         private String pathWithParams(String requestLine) {
-            return requestLine.split(" ")[SECOND_SEGMENT];
+            return requestLine.split(" ")[1];
         }
     }
 }

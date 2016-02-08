@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.sockets;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +21,18 @@ public class ClientSocket {
      }
 
      public InputStream getInputStream() {
-          return null;
+          try {
+               return socket.getInputStream();
+          } catch (IOException e) {
+               throw new RuntimeException(e);
+          }
+     }
+
+     public void close() {
+          try {
+               socket.close();
+          } catch (IOException e) {
+               throw new RuntimeException(e);
+          }
      }
 }

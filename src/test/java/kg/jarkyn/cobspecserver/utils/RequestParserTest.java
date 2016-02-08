@@ -1,5 +1,6 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.utils;
 
+import kg.jarkyn.cobspecserver.data.Request;
 import org.junit.Before;
 import org.junit.Test;
 

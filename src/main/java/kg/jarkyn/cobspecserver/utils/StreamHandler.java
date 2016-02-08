@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.utils;
 
 import java.io.IOException;
 import java.io.OutputStream;

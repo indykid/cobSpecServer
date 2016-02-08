@@ -1,4 +1,4 @@
-package kg.jarkyn.cobspecserver;
+package kg.jarkyn.cobspecserver.middleware;
 
 import kg.jarkyn.cobspecserver.doubles.ClientDouble;
 import kg.jarkyn.cobspecserver.doubles.RequestParserDouble;
@@ -42,5 +42,12 @@ public class ResponseControllerTest {
         responseController.respond(client);
 
         assertTrue(client.hasReceived());
+    }
+
+    @Test
+    public void disconnects() {
+        responseController.respond(client);
+
+        assertTrue(client.isClosed());
     }
 }
