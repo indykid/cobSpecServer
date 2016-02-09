@@ -2,13 +2,12 @@ package kg.jarkyn.cobspecserver.responders;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.utils.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static kg.jarkyn.cobspecserver.utils.Status.REDIRECT;
-
-public class RedirectResponder extends Responder {
+public class RedirectResponder implements Responder {
     private Map<String, String> redirects = new HashMap();
     private String domainUrl;
 
@@ -18,7 +17,7 @@ public class RedirectResponder extends Responder {
 
     @Override
     public Response respond(Request request) {
-        return new Response(status(), headers(request));
+        return new Response(Status.REDIRECT, headers(request));
     }
 
     private String headers(Request request) {
@@ -28,10 +27,6 @@ public class RedirectResponder extends Responder {
 
     private String urlFor(String path) {
         return domainUrl + path;
-    }
-
-    private String status() {
-        return String.format(STATUS_TEMPLATE, REDIRECT.getCode(), REDIRECT.getDescription());
     }
 
     public void registerRedirection(String from, String to) {

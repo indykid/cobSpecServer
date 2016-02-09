@@ -1,27 +1,16 @@
 package kg.jarkyn.cobspecserver.data;
 
-import org.junit.Before;
+import kg.jarkyn.cobspecserver.utils.Status;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 public class ResponseTest {
 
-    private Response response;
-
-    @Before
-    public void setUp() throws Exception {
-        response = new Response("status", "headers", "body".getBytes());
-    }
-
     @Test
-    public void returnsContent() {
-        assertEquals("status\r\nheaders\r\n\r\nbody", response.getContent());
-    }
+    public void returnsFormattedContentAsBytes() {
+        Response response = new Response(Status.SUCCESS, "headers", "body".getBytes());
 
-    @Test
-    public void returnsByteContent() {
-        assertArrayEquals("status\r\nheaders\r\n\r\nbody".getBytes(), response.getByteContent());
+        assertArrayEquals("HTTP/1.1 200 OK\r\nheaders\r\n\r\nbody".getBytes(), response.getByteContent());
     }
 }

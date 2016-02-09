@@ -2,6 +2,7 @@ package kg.jarkyn.cobspecserver.responders;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.utils.Status;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class FormResponderTest {
 
         Response response = responder.respond(request);
 
-        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", response.getContent());
+        assertEquals(Status.SUCCESS, response.getStatus());
     }
 
     @Test
@@ -31,6 +32,6 @@ public class FormResponderTest {
 
         Response response = responder.respond(request);
 
-        assertEquals("HTTP/1.1 200 OK\r\n\r\n\r\n", response.getContent());
+        assertEquals(Status.SUCCESS, response.getStatus());
     }
 }

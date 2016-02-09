@@ -2,6 +2,7 @@ package kg.jarkyn.cobspecserver.responders;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.utils.Status;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -15,7 +16,7 @@ public class RedirectResponderTest {
 
         Response response = responder.respond(request);
 
-        assertEquals("HTTP/1.1 302 Found\r\n" +
-                     "Location: domain_url/\r\n\r\n", response.getContent());
+        assertEquals(Status.REDIRECT, response.getStatus());
+        assertEquals("Location: domain_url/", response.getHeaders());
     }
 }

@@ -1,22 +1,37 @@
 package kg.jarkyn.cobspecserver.data;
 
+import kg.jarkyn.cobspecserver.utils.Status;
+
 public class Response {
-    private String status;
+    private static final String STATUS_TEMPLATE = "HTTP/1.1 %s %s";
+    private Status status;
     private String headers;
     private byte[] body;
 
-    public Response(String status, String headers, byte[] body) {
+    public Response(Status status, String headers, byte[] body) {
         this.status = status;
         this.headers = headers;
         this.body = body;
     }
 
-    public Response(String status) {
+    public Response(Status status) {
         this(status, "", "".getBytes());
     }
 
-    public Response(String status, String headers) {
+    public Response(Status status, String headers) {
         this(status, headers, "".getBytes());
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public String getHeaders() {
+        return headers;
+    }
+
+    public byte[] getBody() {
+        return body;
     }
 
     public byte[] getByteContent() {
@@ -24,12 +39,8 @@ public class Response {
         return combine(header.getBytes(), body);
     }
 
-    public String getContent() {
-        return formatStatus() + formatHeaders() + new String(body);
-    }
-
     private String formatStatus() {
-        return status + "\r\n" ;
+        return String.format(STATUS_TEMPLATE, status.getCode(), status.getDescription()) + "\r\n";
     }
 
     private String formatHeaders() {

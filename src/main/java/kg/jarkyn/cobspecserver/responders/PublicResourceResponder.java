@@ -5,10 +5,11 @@ import kg.jarkyn.cobspecserver.data.Response;
 import kg.jarkyn.cobspecserver.utils.ContentTypeDetector;
 import kg.jarkyn.cobspecserver.utils.HTMLMaker;
 import kg.jarkyn.cobspecserver.utils.PublicResource;
+import kg.jarkyn.cobspecserver.utils.Status;
 
 import java.util.List;
 
-public class PublicResourceResponder extends Responder {
+public class PublicResourceResponder implements Responder {
     private PublicResource publicResource;
     private DirectoryResponder directoryResponder;
     private FileResponder fileResponder;
@@ -41,10 +42,10 @@ public class PublicResourceResponder extends Responder {
         return publicResource.isDirectory(path);
     }
 
-    private class FileResponder extends Responder {
+    private class FileResponder implements Responder {
         @Override
         public Response respond(Request request) {
-            return new Response(successStatus(), headers(request), body(request));
+            return new Response(Status.SUCCESS, headers(request), body(request));
         }
 
         private String headers(Request request) {
@@ -56,7 +57,7 @@ public class PublicResourceResponder extends Responder {
         }
     }
 
-    private class DirectoryResponder extends Responder {
+    private class DirectoryResponder implements Responder {
         @Override
         public Response respond(Request request) {
             String html = "";
@@ -65,7 +66,7 @@ public class PublicResourceResponder extends Responder {
                 html += HTMLMaker.makeLink("/" + fileName, fileName);
             }
             String headers = "Content-Type: text/html";
-            return new Response(successStatus(), headers, html.getBytes());
+            return new Response(Status.SUCCESS, headers, html.getBytes());
         }
     }
 }
