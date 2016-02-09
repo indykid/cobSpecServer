@@ -2,10 +2,7 @@ package kg.jarkyn.cobspecserver;
 
 import kg.jarkyn.cobspecserver.middleware.ResponseController;
 import kg.jarkyn.cobspecserver.middleware.Router;
-import kg.jarkyn.cobspecserver.responders.FormResponder;
-import kg.jarkyn.cobspecserver.responders.OptionsResponder;
-import kg.jarkyn.cobspecserver.responders.PublicResourceResponder;
-import kg.jarkyn.cobspecserver.responders.RedirectResponder;
+import kg.jarkyn.cobspecserver.responders.*;
 import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
 import kg.jarkyn.cobspecserver.utils.PublicResource;
 import kg.jarkyn.cobspecserver.utils.RequestParser;
@@ -74,5 +71,6 @@ public class Runner {
         router.registerRoute("/redirect", setupRedirectResponder());
         router.registerRoute("/method_options", new OptionsResponder());
         router.registerRoute("/form", new FormResponder());
+        router.registerRoute("/logs", new ProtectedResourceResponder("admin", "hunter2"));
     }
 }

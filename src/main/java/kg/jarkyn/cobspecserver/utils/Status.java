@@ -4,7 +4,7 @@ public enum Status {
     SUCCESS("200", "OK"),
     REDIRECT("302", "Found"),
     NOTFOUND("404", "Not Found"),
-    ;
+    UNAUTHORIZED("401", "Unauthorized");
 
     private final String code;
     private final String description;
