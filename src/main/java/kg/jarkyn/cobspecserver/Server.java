@@ -4,11 +4,15 @@ import kg.jarkyn.cobspecserver.middleware.ResponseController;
 import kg.jarkyn.cobspecserver.sockets.ClientSocket;
 import kg.jarkyn.cobspecserver.sockets.ListenerSocket;
 
+import java.util.concurrent.ExecutorService;
+
 public class Server {
+    private ExecutorService executor;
     private ListenerSocket listener;
     private ResponseController responseController;
 
-    public Server(ListenerSocket listener, ResponseController responseController) {
+    public Server(ExecutorService executor, ListenerSocket listener, ResponseController responseController) {
+        this.executor = executor;
         this.listener = listener;
         this.responseController = responseController;
     }
@@ -28,6 +32,6 @@ public class Server {
     }
 
     private void respondTo(ClientSocket client) {
-        responseController.respond(client);
+        executor.execute(new Worker(client, responseController));
     }
 }

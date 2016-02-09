@@ -1,12 +1,11 @@
 package kg.jarkyn.cobspecserver.doubles;
 
-import kg.jarkyn.cobspecserver.sockets.ClientSocket;
 import kg.jarkyn.cobspecserver.middleware.ResponseController;
+import kg.jarkyn.cobspecserver.sockets.ClientSocket;
 import kg.jarkyn.cobspecserver.utils.StreamHandler;
 
 public class ResponseControllerDouble extends ResponseController {
 
-    private int timesResponded = 0;
     private String response;
 
     public ResponseControllerDouble(String response) {
@@ -14,13 +13,12 @@ public class ResponseControllerDouble extends ResponseController {
         this.response = response;
     }
 
-    @Override
-    public void respond(ClientSocket client) {
-        timesResponded++;
-        StreamHandler.write(client.getOutputStream(), response.getBytes());
+    public ResponseControllerDouble() {
+        this("");
     }
 
-    public int getTimesResponded() {
-        return timesResponded;
+    @Override
+    public void respond(ClientSocket client) {
+        StreamHandler.write(client.getOutputStream(), response.getBytes());
     }
 }

@@ -2,6 +2,7 @@ package kg.jarkyn.cobspecserver.responders;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.utils.Status;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +15,6 @@ public class NotFoundResponderTest {
 
         Response response = responder.respond(request);
 
-        assertEquals("HTTP/1.1 404 Not Found\r\n\r\n\r\n", response.getContent());
+        assertEquals(Status.NOTFOUND, response.getStatus());
     }
 }

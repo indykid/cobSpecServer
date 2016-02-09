@@ -2,32 +2,33 @@ package kg.jarkyn.cobspecserver.responders;
 
 import kg.jarkyn.cobspecserver.data.Request;
 import kg.jarkyn.cobspecserver.data.Response;
+import kg.jarkyn.cobspecserver.utils.Status;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static kg.jarkyn.cobspecserver.utils.Status.REDIRECT;
-
-public class RedirectResponder extends Responder {
-    private static final String DOMAIN_URL = "http://localhost:5000";
+public class RedirectResponder implements Responder {
     private Map<String, String> redirects = new HashMap();
+    private String domainUrl;
+
+    public RedirectResponder(String domainUrl) {
+        this.domainUrl = domainUrl;
+    }
 
     @Override
     public Response respond(Request request) {
-        return new Response(status(), headers(request));
+        return new Response(Status.REDIRECT, headers(request));
     }
 
-    private String headers(Request request) {
+    private Map<String, String> headers(Request request) {
+        Map<String, String> headers = new HashMap();
         String path = request.getPath();
-        return "Location: " + urlFor(redirects.get(path));
+        headers.put("Location", urlFor(redirects.get(path)));
+        return headers;
     }
 
     private String urlFor(String path) {
-        return DOMAIN_URL + path;
-    }
-
-    private String status() {
-        return String.format(STATUS_TEMPLATE, REDIRECT.getCode(), REDIRECT.getDescription());
+        return domainUrl + path;
     }
 
     public void registerRedirection(String from, String to) {
