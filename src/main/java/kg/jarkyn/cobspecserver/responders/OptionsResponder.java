@@ -5,7 +5,9 @@ import kg.jarkyn.cobspecserver.data.Response;
 import kg.jarkyn.cobspecserver.utils.Status;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OptionsResponder implements Responder {
     private List<String> methods = Arrays.asList("GET", "HEAD", "POST", "OPTIONS", "PUT");
@@ -15,7 +17,9 @@ public class OptionsResponder implements Responder {
         return new Response(Status.SUCCESS, headers());
     }
 
-    private String headers() {
-        return "Allow: " + String.join(",", methods);
+    private Map<String, String> headers() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Allow", String.join(",", methods));
+        return headers;
     }
 }

@@ -7,7 +7,9 @@ import kg.jarkyn.cobspecserver.utils.HTMLMaker;
 import kg.jarkyn.cobspecserver.utils.PublicResource;
 import kg.jarkyn.cobspecserver.utils.Status;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PublicResourceResponder implements Responder {
     private PublicResource publicResource;
@@ -48,8 +50,10 @@ public class PublicResourceResponder implements Responder {
             return new Response(Status.SUCCESS, headers(request), body(request));
         }
 
-        private String headers(Request request) {
-            return String.format("Content-Type: %s", ContentTypeDetector.detect(request.getPath()));
+        private Map<String, String> headers(Request request) {
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Content-Type", ContentTypeDetector.detect(request.getPath()));
+            return headers;
         }
 
         private byte[] body(Request request) {
@@ -60,13 +64,22 @@ public class PublicResourceResponder implements Responder {
     private class DirectoryResponder implements Responder {
         @Override
         public Response respond(Request request) {
+            return new Response(Status.SUCCESS, headers(), getHTML(request).getBytes());
+        }
+
+        private String getHTML(Request request) {
             String html = "";
             List<String> files = publicResource.readDirectory(request.getPath());
             for (String fileName : files) {
                 html += HTMLMaker.makeLink("/" + fileName, fileName);
             }
-            String headers = "Content-Type: text/html";
-            return new Response(Status.SUCCESS, headers, html.getBytes());
+            return html;
+        }
+
+        private Map<String, String> headers() {
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Content-Type", "text/html");
+            return headers;
         }
     }
 }

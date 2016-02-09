@@ -17,6 +17,6 @@ public class RedirectResponderTest {
         Response response = responder.respond(request);
 
         assertEquals(Status.REDIRECT, response.getStatus());
-        assertEquals("Location: domain_url/", response.getHeaders());
+        assertEquals("domain_url/", response.getHeader("Location"));
     }
 }

@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class PublicResourceResponderTest {
 
@@ -33,8 +32,8 @@ public class PublicResourceResponderTest {
         response = responder.respond(request);
 
         assertEquals(Status.SUCCESS, response.getStatus());
+        assertEquals("text/plain",   response.getHeader("Content-Type"));
         assertArrayEquals("file1 contents".getBytes(), response.getBody());
-        assertTrue(response.getHeaders().contains("Content-Type: text/plain"));
     }
 
     @Test
@@ -44,8 +43,8 @@ public class PublicResourceResponderTest {
         response = responder.respond(request);
 
         assertEquals(Status.SUCCESS, response.getStatus());
+        assertEquals("text/html",    response.getHeader("Content-Type"));
         assertArrayEquals(directoryLinks(), response.getBody());
-        assertTrue(response.getHeaders().contains("Content-Type: text/html"));
     }
 
     @Test

@@ -17,7 +17,7 @@ public class OptionsResponderTest {
         Response response = responder.respond(request);
 
         assertEquals(Status.SUCCESS, response.getStatus());
-        assertEquals("Allow: GET,HEAD,POST,OPTIONS,PUT", response.getHeaders());
+        assertEquals("GET,HEAD,POST,OPTIONS,PUT", response.getHeader("Allow"));
     }
 
 

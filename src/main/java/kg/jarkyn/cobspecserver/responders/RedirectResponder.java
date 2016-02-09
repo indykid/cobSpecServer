@@ -20,9 +20,11 @@ public class RedirectResponder implements Responder {
         return new Response(Status.REDIRECT, headers(request));
     }
 
-    private String headers(Request request) {
+    private Map<String, String> headers(Request request) {
+        Map<String, String> headers = new HashMap();
         String path = request.getPath();
-        return "Location: " + urlFor(redirects.get(path));
+        headers.put("Location", urlFor(redirects.get(path)));
+        return headers;
     }
 
     private String urlFor(String path) {
