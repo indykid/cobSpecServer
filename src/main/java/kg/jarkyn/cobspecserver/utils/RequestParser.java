@@ -3,29 +3,29 @@ package kg.jarkyn.cobspecserver.utils;
 import kg.jarkyn.cobspecserver.data.Request;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class RequestParser {
+    private static final String CONTENT_LENGTH_KEY = "Content-Length";
     private RequestLineParser requestLineParser = new RequestLineParser();
 
     public Request parse(InputStream inputStream) {
-        BufferedReader reader = inputToReader(inputStream);
+        BufferedReader reader = StreamHandler.setupReader(inputStream);
         String requestLine = extractRequestLine(reader);
+        Map<String, String> headers = extractHeaders(reader);
         return new Request(extractMethod(requestLine),
                            extractPath(requestLine),
-                           extractHeaders(reader),
-                           extractParams(requestLine));
+                           headers,
+                           extractParams(requestLine),
+                           extractBody(reader, headers));
     }
 
-    private Map<String, String> extractHeaders(BufferedReader reader) {
-        return new HashMap<>();
+    private String extractRequestLine(BufferedReader reader) {
+        return StreamHandler.readLine(reader);
     }
 
     private String extractMethod(String requestLine) {
@@ -40,17 +40,31 @@ public class RequestParser {
         return requestLineParser.extractParams(requestLine);
     }
 
-    private String extractRequestLine(BufferedReader reader) {
-        try {
-            return reader.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private String extractBody(BufferedReader reader, Map<String, String> headers) {
+        if (isBodyPresent(headers)) {
+            return new String(StreamHandler.readCharacters(reader, getContentLength(headers)));
         }
+        return "";
     }
 
-    private BufferedReader inputToReader(InputStream inputStream) {
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-        return new BufferedReader(inputStreamReader);
+    private Map<String, String> extractHeaders(BufferedReader reader) {
+        Map<String, String> headers = new HashMap<>();
+        List<String> headerLines = StreamHandler.readUntilEmptyLine(reader);
+        headerLines.stream()
+                .filter(line -> line.contains(":"))
+                .forEach(line -> {
+                    String[] pair = line.split(":", 2);
+                    headers.put(pair[0].trim(), pair[1].trim());
+                });
+        return headers;
+    }
+
+    private boolean isBodyPresent(Map<String, String> headers) {
+        return headers.containsKey(CONTENT_LENGTH_KEY);
+    }
+
+    private int getContentLength(Map<String, String> headers) {
+        return Integer.parseInt(headers.get(CONTENT_LENGTH_KEY));
     }
 
     private class RequestLineParser {
